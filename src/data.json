@@ -1,0 +1,2516 @@
+{
+  "title": "Oracle Database Administration I (1Z0-082) Exam Drill",
+  "description": "Oracle 1Z0-082 자격증 대비 기출문제 학습 카드 (단어 뜻 및 핵심 개념 포함)",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which two statements are true about the Oracle Data Dictionary?",
+      "options": [
+        "A. It is owned by the sys user.",
+        "B. Data dictionary base tables can be queried directly.",
+        "C. It is owned by the system user.",
+        "D. Data dictionary views are always created with queries that join two or more base tables.",
+        "E. All data dictionary view joins base tables to dynamic performance views."
+      ],
+      "answer": [
+        "A",
+        "B"
+      ],
+      "vocabulary": "Data Dictionary (데이터 사전): 데이터베이스의 구조, 사용자, 권한 등 모든 메타데이터를 저장하는 시스템 테이블의 집합.",
+      "concept": "데이터 사전은 SYS 유저가 소유하며 데이터베이스의 핵심 구조 정보를 담고 있어 무결성이 중요함."
+    },
+    {
+      "id": 2,
+      "question": "Which two statements are true about views used for viewing tablespace and datafile information?",
+      "options": [
+        "A. Tablespace free space can be viewed in V$TABLESPACE",
+        "B. V$TABLESPACE displays information that is contained in the controlfile about tablespaces",
+        "C. V$TABLESPACE displays information about tablespaces contained in the data dictionary",
+        "D. Tablespace free space can be viewed in DBA_TABLESPACES",
+        "E. A datafile can be renamed when the database is in MOUNT state and the new file name is displayed when querying DBA_DATA_FILES after the database is opened"
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "V$ View (동적 성능 뷰): 현재 인스턴스의 상태나 제어 파일(Controlfile)의 정보를 실시간으로 보여주는 시스템 뷰.",
+      "concept": "V$TABLESPACE는 제어 파일에서 정보를 가져오며, 데이터 파일 이름 변경은 MOUNT 단계에서 수행되어야 메타데이터에 반영됨."
+    },
+    {
+      "id": 3,
+      "question": "Which three statements are true about table data storage in an Oracle Database?",
+      "options": [
+        "A. Data block headers contain their own Data Block Address (DBA)",
+        "B. A table row piece can be chained across several database blocks",
+        "C. Multiple row pieces from the same row may be stored in different database blocks",
+        "D. Multiple row pieces from the same row may be stored in the same block",
+        "E. Data block free space is always contiguous in the middle of the block"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "vocabulary": "Row Chaining (행 연결): 하나의 행(Row) 데이터가 너무 커서 단일 블록에 들어가지 못해 여러 블록에 걸쳐 저장되는 현상.",
+      "concept": "데이터 블록 헤더는 고유 주소를 가지며, 큰 데이터 행은 여러 블록에 나뉘어(Chained) 저장될 수 있음."
+    },
+    {
+      "id": 4,
+      "question": "Which two statements are true about segment types in an Oracle Database?",
+      "options": [
+        "A. Table segments always have two or more extents.",
+        "B. Temporary segments are only stored in a temporary tablespace.",
+        "C. Undo segments are only stored in an undo tablespace.",
+        "D. Cluster segments may contain data from multiple tables.",
+        "E. Index segments always have two or more extents."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Temporary Segment (임시 세그먼트): 정렬(Sort)이나 해시 조인 등의 작업 중 중간 결과를 저장하기 위해 생성되는 공간.",
+      "concept": "임시 세그먼트는 영구적인 데이터 저장이 아니므로 반드시 임시 테이블스페이스(Temporary Tablespace)에만 할당됨."
+    },
+    {
+      "id": 5,
+      "question": "Which three Oracle database space management features will work with both Dictionary and Locally managed tablespaces?",
+      "options": [
+        "A. Oracle Managed Files (OMF)",
+        "B. Online table segment shrink",
+        "C. Online index segment shrink",
+        "D. Automatic data file extension (AUTOEXTEND)",
+        "E. Capacity planning growth reports based on historical data in the Automatic Workload Repository (AWR)"
+      ],
+      "answer": [
+        "A",
+        "D",
+        "E"
+      ],
+      "vocabulary": "OMF (Oracle Managed Files): 오라클이 운영체제 상의 데이터 파일 생성 및 삭제를 자동으로 관리해주는 기능.",
+      "concept": "OMF와 파일 자동 확장(AUTOEXTEND)은 테이블스페이스 내부 관리 방식(Dictionary/Locally)과 무관하게 파일 수준에서 작동함."
+    },
+    {
+      "id": 6,
+      "question": "Which query is valid based on the EMPLOYEES table structure provided?",
+      "options": [
+        "A. SELECT dept_id, AVG(MAX(salary)) FROM employees GROUP BY dept_id;",
+        "B. SELECT dept_id, join_date, SUM(salary) FROM employees GROUP BY dept_id;",
+        "C. SELECT dept_id, join_date, SUM(salary) FROM employees GROUP BY dept_id, join_date;",
+        "D. SELECT dept_id, MAX(AVG(salary)) FROM employees GROUP BY dept_id;"
+      ],
+      "answer": [
+        "C"
+      ],
+      "vocabulary": "GROUP BY (그룹화): 집계 함수(SUM, AVG 등)를 사용할 때 기준이 되는 컬럼을 지정하는 SQL 절.",
+      "concept": "SELECT 절에 포함된 집계 함수가 아닌 일반 컬럼들은 반드시 GROUP BY 절에 모두 명시되어야 문법적으로 유효함."
+    },
+    {
+      "id": 7,
+      "question": "Which three statements are true about connection strings and service names used to connect to an Oracle database instance?",
+      "options": [
+        "A. A single database instance can support connections for multiple service names.",
+        "B. A service name is created by a listener.",
+        "C. A single connection string can refer to multiple database instances.",
+        "D. A connection string including a service name must be defined in the tnsnames.ora file.",
+        "E. A connection string must include the SID of a database Instance.",
+        "F. Different connection strings in the same tnsnames.ora file can contain the same service name, host and port parameters."
+      ],
+      "answer": [
+        "A",
+        "C",
+        "F"
+      ],
+      "vocabulary": "Service Name (서비스 이름): 클라이언트가 데이터베이스에 접속할 때 사용하는 논리적인 이름 (SID보다 유연함).",
+      "concept": "하나의 인스턴스가 여러 서비스를 제공할 수 있고(A), 하나의 연결 문자열로 RAC 같은 다중 인스턴스 환경에 접속할 수 있음(C)."
+    },
+    {
+      "id": 8,
+      "question": "Which three statements are true regarding single row subqueries?",
+      "options": [
+        "A. They must be placed on the right side of the comparison operator or condition.",
+        "B. They must be placed on the left side of the comparison operator or condition.",
+        "C. They can be used in the where clause.",
+        "D. A SQL statement may have multiple single row subquery blocks.",
+        "E. They must return a row to prevent errors in the SQL statement.",
+        "F. They can be used in the having clause."
+      ],
+      "answer": [
+        "C",
+        "D",
+        "F"
+      ],
+      "vocabulary": "Single Row Subquery (단일 행 서브쿼리): 실행 결과가 오직 하나의 행(Row)만 반환하는 하위 쿼리.",
+      "concept": "단일 행 서브쿼리는 WHERE 절, HAVING 절 등 다양한 위치에서 조건 비교를 위해 여러 번 사용될 수 있음."
+    },
+    {
+      "id": 9,
+      "question": "Which two actions must you take to ensure UNDOTBS01 is used as the default UNDO tablespace?",
+      "options": [
+        "A. Add the SEGMENT SPACE MANAGEMENT AUTO clause",
+        "B. Set UNDO_TABLESPACE to UNDOTBS01",
+        "C. Add the NOLOGGING clause",
+        "D. Make certain that the database operates in automatic undo management mode",
+        "E. Add the ONLINE clause"
+      ],
+      "answer": [
+        "B",
+        "D"
+      ],
+      "vocabulary": "UNDO_TABLESPACE: 인스턴스가 사용할 기본 언두 테이블스페이스를 지정하는 초기화 파라미터.",
+      "concept": "자동 언두 관리 모드(Automatic Undo Management)를 활성화하고, 사용할 특정 테이블스페이스 이름을 파라미터로 지정해야 함."
+    },
+    {
+      "id": 10,
+      "question": "Why does the DB01.abc.com service show unknown status in the listener output?",
+      "options": [
+        "A. The service DB01.abc.com is dynamically registered",
+        "B. The LOCAL_LISTENER database parameter is not set to a service name that refers to LISTENER_1",
+        "C. The service DB01.abc.com is statically registered",
+        "D. The listener is not listening on the default port 1521",
+        "E. The SID_LIST_LISTENER section is not contained in the LISTENER.ORA file"
+      ],
+      "answer": [
+        "C"
+      ],
+      "vocabulary": "Static Registration (정적 등록): listener.ora 파일에 DB 정보를 직접 기록하여 리스너가 DB 상태와 무관하게 서비스를 알리는 방식.",
+      "concept": "리스너 상태가 'UNKNOWN'인 것은 리스너가 해당 인스턴스의 실제 가동 여부를 모르는 정적 등록 상태임을 의미함."
+    },
+    {
+      "id": 11,
+      "question": "Which two statements are true about the command: ALTER DATABASE MOVE DATAFILE ...?",
+      "options": [
+        "A. Compressed objects in SALES01.DBF will be uncompressed In SALES02.DBF after the move.",
+        "B. DML may be performed on tables with one or more extents in this data file during the execution of this command.",
+        "C. It overwrites any existing file with the name SALES02.DBF.dbf in /u02 by default.",
+        "D. The 'to' clause containing the new file name must be specified even if Oracle Managed Files (OMF) is used.",
+        "E. Tables with one or more extents in this data file may be queried during the execution of this command."
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "Online Datafile Move (온라인 데이터파일 이동): 데이터베이스가 운영 중인 상태(Online)에서 데이터 파일을 이동하거나 이름을 바꾸는 기능.",
+      "concept": "데이터 파일을 이동하는 동안에도 해당 파일 내의 데이터에 대한 조회(Query)와 변경(DML) 작업이 중단 없이 가능함."
+    },
+    {
+      "id": 12,
+      "question": "Which is the default column or columns for sorting output from compound queries using SET operators such as intersect In a SQL statement?",
+      "options": [
+        "A. the first column in the first select of the compound query",
+        "B. the first varchar2 column in the first select of the compound query",
+        "C. the first number column in the first select of the compound query",
+        "D. the first number or varchar2 column in the last select of the compound query",
+        "E. the first column in the last select of the compound query"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "SET Operator (집합 연산자): UNION, INTERSECT, MINUS 등 여러 쿼리의 결과를 합치거나 비교하는 연산자.",
+      "concept": "집합 연산자를 사용할 때 별도의 ORDER BY가 없으면, 첫 번째 SELECT 문의 첫 번째 컬럼을 기준으로 정렬됨."
+    },
+    {
+      "id": 13,
+      "question": "Which two statements are true about the SET VERIFY ON command?",
+      "options": [
+        "A. It can be used only in SQL*Plus",
+        "B. It displays values for variables used only in the WHERE clause of a query",
+        "C. It can be used in SQL Developer and SQL*Plus",
+        "D. It displays values for variables created by the DEFINE command",
+        "E. It displays values for variables prefixed with &&"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "SET VERIFY ON: SQL 스크립트 실행 시 치환 변수(&, &&)가 실제 어떤 값으로 바뀌었는지 화면에 보여주는 명령어.",
+      "concept": "SQL*Plus와 SQL Developer에서 모두 사용 가능하며, 변수 치환 전후의 값을 출력하여 디버깅에 도움을 줌."
+    },
+    {
+      "id": 14,
+      "question": "Table ORDER_ITEMS contains columns ORDER_ID, UNIT_PRICE and QUANTITY. Which two statements are true regarding the queries provided?",
+      "options": [
+        "A. Statement 1 returns only one row of output.",
+        "B. Statement 2 returns only one row of output.",
+        "C. Both statements will return NULL if either UNIT_PRICE or QUANTITY contains NULL.",
+        "D. Both the statements give the same output.",
+        "E. Statement 2 may return multiple rows of output."
+      ],
+      "answer": [
+        "A",
+        "E"
+      ],
+      "vocabulary": "Aggregation (집계): 여러 행의 데이터를 하나의 요약된 값(합계, 평균 등)으로 계산하는 과정.",
+      "concept": "GROUP BY가 없으면 전체가 하나의 그룹이 되어 1개 행만 반환(A)하고, GROUP BY가 있으면 그룹 수만큼 여러 행을 반환함(E)."
+    },
+    {
+      "id": 15,
+      "question": "Which two statements are true regarding a SAVEPOINT?",
+      "options": [
+        "A. Rolling back to a SAVEPOINT can undo a CREATE INDEX statement",
+        "B. Rolling back to a SAVEPOINT can undo a TRUNCATE statement",
+        "C. Only one SAVEPOINT may be issued in a transaction",
+        "D. A SAVEPOINT does not issue a COMMIT",
+        "E. Rolling back to a SAVEPOINT can undo a DELETE statement"
+      ],
+      "answer": [
+        "D",
+        "E"
+      ],
+      "vocabulary": "SAVEPOINT (저장점): 트랜잭션 내에서 특정 지점으로 롤백할 수 있도록 마킹하는 기능.",
+      "concept": "SAVEPOINT는 트랜잭션을 종료(Commit)하지 않으며, 해당 지점 이후의 DML(Delete 등) 작업만 부분적으로 취소할 수 있음."
+    },
+    {
+      "id": 16,
+      "question": "Which two statements are true about the configuration and use of UNDO_RETENTION with GUARANTEED RETENTION?",
+      "options": [
+        "A. UNDO_RETENTION specifies for how long Oracle attempts to keep expired and unexpired UNDO.",
+        "B. UNDO_RETENTION specifies how long all types of UNDO are retained.",
+        "C. Unexpired UNDO is always retained.",
+        "D. Active UNDO is always retained.",
+        "E. UNDO_RETENTION specifies for how long Oracle attempts to keep unexpired UNDO."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Retention Guarantee (보존 보장): 언두 테이블스페이스 공간이 부족해도 지정된 시간 동안 언두 데이터를 덮어쓰지 않도록 강제하는 설정.",
+      "concept": "Guaranteed 모드에서는 공간이 부족해 트랜잭션이 실패하더라도, 만료되지 않은(Unexpired) 언두 데이터는 절대 덮어씌워지지 않음."
+    },
+    {
+      "id": 17,
+      "question": "In the connection command 'CONNECT HR/HRMGR@orcl', which statement is true about ORCL?",
+      "options": [
+        "A. It must be the value of the SERVICE_NAMES parameter on the client side",
+        "B. It must resolve to a valid connect descriptor in the server's tnsnames.ora file",
+        "C. It must resolve to a valid connect descriptor in the client's tnsnames.ora file",
+        "D. It must be the name of the database to whose instance HR wishes to connect",
+        "E. It must be the name of the server running the database to whose instance HR wishes to connect"
+      ],
+      "answer": [
+        "C"
+      ],
+      "vocabulary": "Net Service Name (넷 서비스 이름): 클라이언트가 접속할 데이터베이스의 네트워크 주소 정보를 별칭(Alias)으로 정의한 것.",
+      "concept": "클라이언트 측의 tnsnames.ora 파일에서 해당 별칭(@orcl)을 찾아 호스트, 포트, 서비스 이름 등의 접속 정보를 해석함."
+    },
+    {
+      "id": 18,
+      "question": "Which four statements are true regarding primary and foreign key constraints and the effect they can have on table data?",
+      "options": [
+        "A. A table can have only one primary key but multiple foreign keys",
+        "B. A table can have only one primary key and one foreign key",
+        "C. The foreign key columns and parent table primary key columns must have the same names",
+        "D. It is possible for child rows that have a foreign key to remain in the child table at the time the parent row is deleted",
+        "E. It is possible for child rows that have a foreign key to be deleted automatically from the child table at the time the parent row is deleted",
+        "F. Only the primary key can be defined at the column and table level",
+        "G. Primary key and foreign key constraints can be defined at both the column and table level"
+      ],
+      "answer": [
+        "A",
+        "D",
+        "E",
+        "G"
+      ],
+      "vocabulary": "Referential Integrity (참조 무결성): 외래 키(Foreign Key)를 통해 테이블 간의 관계를 맺고 데이터의 일관성을 유지하는 성질.",
+      "concept": "부모 행 삭제 시 자식 행을 함께 삭제(Cascade)하거나 유지할 수 있으며, PK는 테이블당 하나만, FK는 여러 개 설정 가능함."
+    },
+    {
+      "id": 19,
+      "question": "Which query should be used to display customers with income levels and calculate 5% credit limit, excluding nulls?",
+      "options": [
+        "A. ... cust_income_level IS NOT NULL AND due_amount IS NOT NULL;",
+        "B. ... cust_income_level != NULL ...",
+        "C. ... cust_income_level <> NULL ...",
+        "D. ... cust_income_level != NULL ...",
+        "E. ... cust_income_level IS NOT NULL AND cust_credit_limit IS NOT NULL;"
+      ],
+      "answer": [
+        "E"
+      ],
+      "vocabulary": "IS NOT NULL: SQL에서 데이터 값이 NULL(존재하지 않음)이 아닌 경우를 찾기 위한 유일한 비교 연산자.",
+      "concept": "NULL은 값과 비교(=, !=)할 수 없으므로 반드시 IS NULL 또는 IS NOT NULL 구문을 사용하여 필터링해야 함."
+    },
+    {
+      "id": 20,
+      "question": "Which two are true about data type conversions involving columns QTY_SOLD (Number) and INVOICE_DATE (Date)?",
+      "options": [
+        "A. CONCAT (qty_sold, invoice_date): requires explicit conversion",
+        "B. invoice_date = '15-march-2019': uses implicit conversion",
+        "C. invoice_date > '01-02-2019': uses implicit conversion",
+        "D. qty_sold BETWEEN '101' AND '110': uses implicit conversion",
+        "E. qty_sold = '0554982' uses implicit conversion"
+      ],
+      "answer": [
+        "B",
+        "D"
+      ],
+      "vocabulary": "Implicit Conversion (암시적 형변환): 오라클이 서로 다른 데이터 타입 비교 시 자동으로 타입을 변환해주는 기능.",
+      "concept": "문자열을 날짜나 숫자 컬럼과 비교할 때, 오라클은 문자열을 해당 컬럼의 타입으로 자동 변환하여 비교를 수행함."
+    },
+    {
+      "id": 21,
+      "question": "Which data type should you use for a column supporting date arithmetic, storing a loan period of up to 10 years, and calculating interest days?",
+      "options": [
+        "A. INTERVAL YEAR TO MONTH",
+        "B. INTERVAL DAY TO SECOND",
+        "C. TIMESTAMP WITH LOCAL TIMEZONE",
+        "D. TIMESTAMP",
+        "E. TIMESTAMP WITH TIMEZONE"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "INTERVAL DAY TO SECOND: 날짜 간의 차이를 일(Day), 시, 분, 초 단위의 기간으로 저장하는 데이터 타입.",
+      "concept": "대출 기간을 일수(Days) 단위로 정확히 계산하고 저장하기 위해서는 년/월 단위보다 일/초 단위의 Interval 타입이 적합함."
+    },
+    {
+      "id": 22,
+      "question": "During an export operation (expdp), you detach from the job. Which two statements are true about the job?",
+      "options": [
+        "A. You can no longer monitor it",
+        "B. You can reattach to it and monitor it",
+        "C. It is paused and can be resumed",
+        "D. It continues to run in the background",
+        "E. It terminates"
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "ATTACH/DETACH (작업 연결/해제): Data Pump 작업 중 클라이언트 세션을 작업에서 분리하거나 다시 연결하는 기능.",
+      "concept": "Data Pump 작업은 서버 백그라운드에서 실행되므로, 터미널을 종료해도 작업은 계속되며 나중에 다시 연결(Attach)하여 모니터링 가능함."
+    },
+    {
+      "id": 23,
+      "question": "Which two statements are true about the PMON background process?",
+      "options": [
+        "A. It registers database services with all local and remote listeners known to the database instance",
+        "B. It frees resources held by abnormally terminated processes",
+        "C. It records checkpoint information in the control file",
+        "D. It frees unused temporary segments",
+        "E. It kills sessions that exceed idle time"
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "PMON (Process Monitor): 비정상 종료된 프로세스를 정리하고 리소스를 해제하는 핵심 백그라운드 프로세스.",
+      "concept": "PMON은 죽은 프로세스의 락(Lock)을 해제하고 트랜잭션을 롤백하며, 유휴 세션을 정리하는 청소부 역할을 수행함."
+    },
+    {
+      "id": 24,
+      "question": "Which two tasks can you perform using DBCA for databases?",
+      "options": [
+        "A. Configure a nonstandard block size for a new database",
+        "B. Register a new database with an available Enterprise Manager Management server",
+        "C. Change the standard block size of an existing database",
+        "D. Configure incremental backups for a new database",
+        "E. Enable flashback database for an existing database"
+      ],
+      "answer": [
+        "A",
+        "B"
+      ],
+      "vocabulary": "DBCA (Database Configuration Assistant): 데이터베이스 생성, 구성 변경, 삭제를 도와주는 그래픽 툴.",
+      "concept": "DBCA를 통해 DB 생성 시 표준 외 블록 크기를 설정하거나, 생성된 DB를 Enterprise Manager에 등록하여 관리할 수 있음."
+    },
+    {
+      "id": 25,
+      "question": "Which two statements are true regarding the UNION and UNION ALL operators?",
+      "options": [
+        "A. Duplicates are eliminated automatically by the UNION ALL operator",
+        "B. The number of columns selected in each SELECT statement must be identical",
+        "C. The names of columns selected in each SELECT statement must be identical",
+        "D. The output is sorted by the UNION ALL operator",
+        "E. NULLS are not ignored during duplicate checking"
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "UNION vs UNION ALL: 두 쿼리 결과의 합집합을 구하는 연산자들 (중복 제거 여부가 차이점).",
+      "concept": "집합 연산을 위해서는 컬럼의 개수와 타입이 일치해야 하며(B), UNION은 중복 제거를 위해 NULL도 값으로 취급하여 비교함(E)."
+    },
+    {
+      "id": 26,
+      "question": "Which three statements are true about GLOBAL TEMPORARY TABLES?",
+      "options": [
+        "A. A TRUNCATE command issued in a session causes all rows in a GLOBAL TEMPORARY TABLE for the issuing session to be deleted.",
+        "B. GLOBAL TEMPORARY TABLE rows inserted by a session are available to any other session whose user has been granted select on the table.",
+        "C. GLOBAL TEMPORARY TABLE space allocation occurs at session start.",
+        "D. Any GLOBAL TEMPORARY TABLE rows existing at session termination will be deleted.",
+        "E. A GLOBAL TEMPORARY TABLE's definition is available to multiple sessions.",
+        "F. A DELETE command on a GLOBAL TEMPORARY TABLE cannot be rolled back."
+      ],
+      "answer": [
+        "A",
+        "D",
+        "E"
+      ],
+      "vocabulary": "Global Temporary Table (GTT): 정의(Definition)는 영구적으로 공유되지만, 데이터는 세션별로(Private) 관리되는 테이블.",
+      "concept": "GTT의 데이터는 세션이 종료되면 자동 삭제되며, 테이블 구조 자체는 모든 세션에서 공유됨. [cite: 274, 275, 278, 279, 280]"
+    },
+    {
+      "id": 27,
+      "question": "Based on the sequence: INSERT... SAVEPOINT a; DELETE... ROLLBACK TO SAVEPOINT a; ROLLBACK; Which three statements are true?",
+      "options": [
+        "A. The second rollback command restores the row that was inserted.",
+        "B. The first rollback command leaves the table's 100 original rows locked.",
+        "C. The second rollback command rolls back the rollback to savepoint a command.",
+        "D. The first rollback command leaves the inserted row locked.",
+        "E. The first RollBack command restores the row that was inserted.",
+        "F. The second rollback command restores the 100 rows that were in the table originally.",
+        "G. The first rollback command restores the 100 rows that were in the table originally."
+      ],
+      "answer": [
+        "A",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Rollback (롤백): 트랜잭션의 변경 사항을 취소하고 데이터를 이전 상태로 되돌리는 명령어.",
+      "concept": "SAVEPOINT로 돌아가면 그 이후의 DELETE는 취소되지만 트랜잭션은 유지됨. 최종 ROLLBACK은 INSERT를 포함한 전체 트랜잭션을 취소함. [cite: 296, 297, 298, 299, 300, 301, 303, 306, 308, 310]"
+    },
+    {
+      "id": 28,
+      "question": "Which three statements are true about inner and outer joins?",
+      "options": [
+        "A. A full outer join returns matched and unmatched rows",
+        "B. An inner join returns matched rows",
+        "C. Outer joins can only be used between two tables per query",
+        "D. A full outer join must use Oracle syntax",
+        "E. Outer joins can be used when there are multiple join conditions on two tables",
+        "F. A left or right outer join returns only unmatched rows"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "E"
+      ],
+      "vocabulary": "Full Outer Join (전체 외부 조인): 두 테이블의 일치하는 데이터뿐만 아니라, 양쪽의 일치하지 않는 데이터까지 모두 반환하는 조인.",
+      "concept": "Inner Join은 교집합(일치)만 반환하며, Outer Join은 일치하지 않는 행도 포함하여 반환함. [cite: 311, 312, 313, 316, 317]"
+    },
+    {
+      "id": 29,
+      "question": "Which three statements are true about external tables in Oracle 18c and later releases?",
+      "options": [
+        "A. External table files can be used for other external tables in a different database",
+        "B. The ORACLE_LOADER access driver can be used to unload data from a database into an external table",
+        "C. The ORACLE_DATAPUMP access driver can be used to unload data from a database into an external table",
+        "D. They cannot be partitioned",
+        "E. The ORACLE_DATAPUMP access driver can be used to load data into a database from an external table",
+        "F. They support UPDATEs but not INSERTs and DELETEs"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "vocabulary": "External Table (외부 테이블): 데이터베이스 외부에 저장된 파일(CSV 등)을 마치 테이블처럼 조회할 수 있게 해주는 기능.",
+      "concept": "ORACLE_DATAPUMP 드라이버를 사용하면 DB 데이터를 외부 파일로 언로드(Unload)하거나 로드(Load)할 수 있음. [cite: 318, 320, 321, 322, 326]"
+    },
+    {
+      "id": 30,
+      "question": "Which three statements are true about a self join?",
+      "options": [
+        "A. The ON clause must be used",
+        "B. The query must use two different aliases for the table",
+        "C. It must be an equijoin",
+        "D. It must be an inner join",
+        "E. The ON clause can be used",
+        "F. It can be an outer join"
+      ],
+      "answer": [
+        "B",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Self Join (셀프 조인): 하나의 테이블을 자기 자신과 조인하는 기법 (예: 직원 테이블에서 사원과 매니저 관계 조회).",
+      "concept": "같은 테이블을 두 번 참조하므로 반드시 서로 다른 별칭(Alias)을 사용해야 식별이 가능함. [cite: 329, 331, 334, 335, 336]"
+    },
+    {
+      "id": 31,
+      "question": "Which three statements are true about the Automatic Diagnostic Repository (ADR)?",
+      "options": [
+        "A. It Is held Inside an Oracle database schema.",
+        "B. The ADR base is specified In the diagnostic_dest database parameter.",
+        "C. It is only used for Oracle Database diagnostic information.",
+        "D. It is a file-based repository held outside any database.",
+        "E. It can be used for problem diagnosis of a database when that database's instance is down."
+      ],
+      "answer": [
+        "B",
+        "D",
+        "E"
+      ],
+      "vocabulary": "ADR (Automatic Diagnostic Repository): 오라클 데이터베이스의 진단 데이터(Trace, Alert Log 등)를 저장하는 파일 기반의 저장소.",
+      "concept": "ADR은 DB 내부가 아닌 파일 시스템에 존재하므로, DB 인스턴스가 다운된 상태에서도 로그를 확인하고 진단할 수 있음. [cite: 337, 341, 343, 344]"
+    },
+    {
+      "id": 32,
+      "question": "When executing 'ALTER DATABASE MOUNT' from NOMOUNT state, which two actions are performed?",
+      "options": [
+        "A. The online redo logs are opened",
+        "B. The online data files are opened",
+        "C. The alert log records the execution details",
+        "D. The Oracle background processes are started",
+        "E. The initialization parameter file is read",
+        "F. The control file is read"
+      ],
+      "answer": [
+        "C",
+        "F"
+      ],
+      "vocabulary": "MOUNT State (마운트 상태): 인스턴스가 제어 파일(Control File)을 읽어 데이터베이스의 물리적 구조를 인지한 상태.",
+      "concept": "NOMOUNT에서 MOUNT로 넘어갈 때 제어 파일을 읽으며, 데이터 파일과 리두 로그는 아직 열리지 않음(Open 단계 아님). [cite: 345, 346, 350, 353, 354]"
+    },
+    {
+      "id": 33,
+      "question": "Which three statements are true about advanced connection options supported by Oracle Net?",
+      "options": [
+        "A. Connect Time Failover requires the use of Transparent Application Failover (TAF)",
+        "B. Source Routing requires the use of a name server",
+        "C. Source Routing enables the use of Connection Manager (CMAN) which enables network traffic to be routed through a firewall",
+        "D. Load Balancing can balance the number of connections to dispatchers when using a Shared Server configuration",
+        "E. Load Balancing requires the use of a name server",
+        "F. Connect Time Failover requires the connect string to have two or more listener addresses configured"
+      ],
+      "answer": [
+        "C",
+        "D",
+        "F"
+      ],
+      "vocabulary": "Load Balancing (부하 분산): 클라이언트의 연결 요청을 여러 리스너나 인스턴스에 고르게 분배하여 성능을 최적화하는 기능.",
+      "concept": "Connection Manager(CMAN)를 통한 소스 라우팅은 방화벽 환경에서 유용하며, Failover를 위해서는 다중 주소 설정이 필요함. [cite: 358, 362, 363, 365, 366]"
+    },
+    {
+      "id": 34,
+      "question": "Where is the UNDO stored when an UPDATE is executed on a temporary table with temporary undo enabled?",
+      "options": [
+        "A. in the undo tablespace",
+        "B. in the SYSAUX tablespace",
+        "C. in the SGA",
+        "D. in the PGA",
+        "E. in the temporary tablespace"
+      ],
+      "answer": [
+        "E"
+      ],
+      "vocabulary": "Temporary Undo (임시 언두): 임시 테이블에 대한 변경 사항의 언두 데이터를 일반 언두 테이블스페이스가 아닌 임시 테이블스페이스에 저장하는 기능.",
+      "concept": "임시 언두를 사용하면 영구 언두 테이블스페이스의 부하를 줄이고 리두 로그 생성을 감소시킬 수 있음. [cite: 369, 370, 378, 379]"
+    },
+    {
+      "id": 35,
+      "question": "Which two statements are true about single row functions?",
+      "options": [
+        "A. MOD: returns the quotient of a division operation",
+        "B. FLOOR: returns the smallest integer greater than or equal to a specified number",
+        "C. TRUNC: can be used with NUMBER and DATE values",
+        "D. CONCAT: can be used to combine any number of values",
+        "E. CEIL: can be used for positive and negative numbers"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "TRUNC (절삭 함수): 숫자나 날짜를 지정된 단위 이하로 잘라내는 함수.",
+      "concept": "TRUNC(15.79, 1)은 15.7을 반환하며, 날짜에도 사용하여 시간을 제거하거나 월 단위로 자를 수 있음. [cite: 382, 385, 387, 388]"
+    },
+    {
+      "id": 36,
+      "question": "In which three situations does a transaction complete thereby committing the updates?",
+      "options": [
+        "A. when a DBA issues a successful SHUTDOWN TRANSACTIONAL statement and the user then issues a COMMIT",
+        "B. when a CREATE INDEX statement is executed successfully in the same session",
+        "C. when a COMMIT statement is issued by the same user from another session in the same database instance",
+        "D. when the session logs out successfully",
+        "E. when a DBA issues a successful SHUTDOWN IMMEDIATE statement and the user then issues a COMMIT",
+        "F. when a CREATE TABLE AS SELECT statement is executed unsuccessfully in the same session"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "vocabulary": "Implicit Commit (암시적 커밋): 명시적으로 COMMIT 명령어를 치지 않아도 시스템에 의해 자동으로 커밋되는 상황.",
+      "concept": "DDL(CREATE, ALTER 등) 실행 시, 정상 로그아웃 시 현재 트랜잭션은 자동으로 커밋됨. [cite: 389, 391, 392, 395, 397]"
+    },
+    {
+      "id": 37,
+      "question": "Which three statements are true regarding indexes?",
+      "options": [
+        "A. A UNIQUE index can be altered to be non-unique",
+        "B. A SELECT statement can access one or more indices without accessing any tables",
+        "C. A table belonging to one user can have an index that belongs to a different user",
+        "D. An update to a table can result in updates to any or all of the table's indexes",
+        "E. When a table is dropped and is moved to the RECYCLE BIN, all indexes built on that table are permanently dropped",
+        "F. An update to a table can result in no updates to any of the table's indexes"
+      ],
+      "answer": [
+        "A",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Recycle Bin (휴지통): DROP된 테이블과 관련 객체(인덱스 등)를 영구 삭제 전까지 보관하는 논리적 컨테이너.",
+      "concept": "테이블이 휴지통으로 가면 인덱스도 함께 이동하며, 다른 유저 스키마에 인덱스를 생성할 수 있음. [cite: 398, 399, 401, 403, 404]"
+    },
+    {
+      "id": 38,
+      "question": "Which three statements are true about Oracle synonyms?",
+      "options": [
+        "A. A synonym cannot be created for a PL/SQL package",
+        "B. A synonym can be available to all users",
+        "C. A SEQUENCE can have a synonym",
+        "D. A synonym created by one user can refer to an object belonging to another user",
+        "E. Any user can drop a PUBLIC synonym"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ],
+      "vocabulary": "Synonym (동의어): 테이블, 뷰, 시퀀스 등 데이터베이스 객체에 부여하는 별칭.",
+      "concept": "PUBLIC 시노님은 모든 사용자가 접근 가능하며, 시노님을 통해 다른 사용자의 객체에 쉽게 접근할 수 있음(스키마 은닉). [cite: 407, 409, 412, 413, 415]"
+    },
+    {
+      "id": 39,
+      "question": "Which three statements are true about single-row functions?",
+      "options": [
+        "A. They can be used only in the WHERE clause of a SELECT statement",
+        "B. The argument can be a column name, variable, literal or an expression",
+        "C. The data type returned can be different from the data type of the argument",
+        "D. They can be nested to any level",
+        "E. They can accept only one argument",
+        "F. They return a single result row per table"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ],
+      "vocabulary": "Nesting (중첩): 함수의 결과를 다른 함수의 인자로 사용하는 것 (예: TO_CHAR(ROUND(date))).",
+      "concept": "단일 행 함수는 중첩이 가능하며, 입력 타입과 다른 타입(예: 숫자를 문자로)을 반환할 수 있음. [cite: 416, 418, 419, 420, 423]"
+    },
+    {
+      "id": 40,
+      "question": "Which three types of analyses can be done using the DBMS_PRIVILEGE_CAPTURE package?",
+      "options": [
+        "A. analysis of all privileges used by all users including administrative users in the database",
+        "B. analysis of all privileges used by all users but excluding administrative users in the database",
+        "C. analysis of privileges that a user has on their own schema objects that they did not use",
+        "D. analysis of privileges that a user has on their own schema objects that they did use",
+        "E. analysis of privileges granted directly to a role that are then used by a user who has been granted that role",
+        "F. analysis of privileges granted indirectly to a role"
+      ],
+      "answer": [
+        "B",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Privilege Analysis (권한 분석): 실제 사용된 권한을 추적하여 과도한 권한 부여를 식별하고 최소 권한 원칙을 적용하는 기능.",
+      "concept": "DBMS_PRIVILEGE_CAPTURE를 통해 사용되지 않은 권한이나 역할을 통해 간접적으로 사용된 권한 등을 분석할 수 있음. [cite: 428, 430, 433, 436, 438]"
+    },
+    {
+      "id": 41,
+      "question": "Regarding the creation of table SALES1 from SALES, which two statements are true?",
+      "options": [
+        "A. SALES1 has not NULL constraints on any selected columns which had those constraints in the sales table.",
+        "B. SALES1 has primary key and unique constraints on any selected columns which had those constraints in the sales table.",
+        "C. SALES1 is created with 55,000 rows.",
+        "D. SALES1 is created with no rows.",
+        "E. SALES1 is created with 1 row."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "CTAS (Create Table As Select): SELECT 문의 결과를 바탕으로 새로운 테이블을 생성하는 명령어.",
+      "concept": "CTAS는 NOT NULL 제약조건은 복사하지만, PK나 Unique 같은 제약조건은 복사하지 않음. 데이터는 WHERE 조건에 따라 복사됨. [cite: 443, 445, 448]"
+    },
+    {
+      "id": 42,
+      "question": "You want to display the rows from the SALES1 table which not present in the SALES2 table. Which set operator generates the required output?",
+      "options": [
+        "A. INTERSECT",
+        "B. UNION ALL",
+        "C. UNION",
+        "D. SUBTRACT",
+        "E. MINUS"
+      ],
+      "answer": [
+        "E"
+      ],
+      "vocabulary": "MINUS (차집합): 첫 번째 쿼리의 결과에서 두 번째 쿼리의 결과(교집합)를 뺀 나머지 행을 반환하는 집합 연산자.",
+      "concept": "SALES1에만 있고 SALES2에는 없는 데이터를 찾기 위해 사용됨. (ANSI SQL의 EXCEPT와 동일) [cite: 455, 461, 462]"
+    },
+    {
+      "id": 43,
+      "question": "Which two WHERE clauses correctly filter for borrowed_date = SYSDATE AND (transaction type 'RM' OR member_id 'A101' or 'A102')?",
+      "options": [
+        "A. WHERE borrowed_date = SYSDATE AND transaction_type = 'RM' OR member_id IN ('A101', 'A102');",
+        "B. ... (incorrect syntax)",
+        "C. ... (incorrect syntax)",
+        "D. WHERE borrowed_date = SYSDATE AND (transaction_type = 'RM' OR member_id IN ('A101', 'A102'));"
+      ],
+      "answer": [
+        "A",
+        "D"
+      ],
+      "vocabulary": "Operator Precedence (연산자 우선순위): AND 연산자가 OR 연산자보다 우선순위가 높음.",
+      "concept": "괄호를 사용하여 OR 조건을 묶어주어야 의도한 대로 '날짜가 오늘이면서 (타입이 RM이거나 멤버가 특정인)' 조건을 만족시킴. [cite: 478, 481, 482]"
+    },
+    {
+      "id": 44,
+      "question": "Which three statements are true about data block storage in an Oracle Database?",
+      "options": [
+        "A. A block header contains a row directory pointing to all rows in the block.",
+        "B. An index block can contain row data.",
+        "C. Row data is stored starting at the end of the block.",
+        "D. A data block header is of a fixed length.",
+        "E. A table block must always contain row data."
+      ],
+      "answer": [
+        "A",
+        "D"
+      ],
+      "vocabulary": "Block Header (블록 헤더): 데이터 블록의 가장 앞부분에 위치하며 블록 주소, 유형, 트랜잭션 정보 등을 담고 있음.",
+      "concept": "데이터 블록 내에서 행 데이터(Row Data)는 블록의 바닥(Bottom)부터 위로 쌓이고, 헤더는 고정된 크기를 가짐. [cite: 485, 488, 490]"
+    },
+    {
+      "id": 45,
+      "question": "In which three situations will re-executing a query on v$transaction return a row with a new XID?",
+      "options": [
+        "A. after successfully executing a commit or rollback followed by a select statement",
+        "B. after successfully executing a create table as select statement followed by a select for update statement",
+        "C. after successfully executing a commit or rollback followed by a DML statement",
+        "D. after successfully executing a create table statement followed by a create index statement",
+        "E. after successfully executing a DML statement following a failed DML statement",
+        "F. after successfully executing a truncate statement followed by a DML statement"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "F"
+      ],
+      "vocabulary": "XID (Transaction ID): 트랜잭션을 고유하게 식별하는 ID.",
+      "concept": "새로운 트랜잭션은 첫 번째 DML(Insert, Update 등)이나 DDL, 또는 SELECT FOR UPDATE 실행 시 시작되며 이때 새로운 XID가 할당됨. [cite: 501, 502, 503, 506]"
+    },
+    {
+      "id": 46,
+      "question": "Which two where conditions display customers whose last name starts with A or B and credit limit is below 1000?",
+      "options": [
+        "A. WHERE (UPPER (cust_last_name) LIKE INITCAP('A') ...)",
+        "B. WHERE UPPER (cust_last_name) BETWEEN UPPER('A' AND 'B%')...",
+        "C. WHERE UPPER(cust_last_name) IN ('A', 'B') AND cust_credit_limit < 1000;",
+        "D. WHERE (UPPER(cust_last_name) LIKE 'A' OR UPPER(cust_last_name) LIKE 'B')...",
+        "E. WHERE (INITCAP(cust_last_name) LIKE 'A%' OR INITCAP(cust_last_name) LIKE 'B%') AND cust_credit_limit < 1000;"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "Pattern Matching (패턴 매칭): LIKE 연산자와 와일드카드(%)를 사용하여 특정 문자열 패턴을 검색하는 것.",
+      "concept": "이름이 A나 B로 시작하는 조건을 찾기 위해 LIKE 'A%' 또는 IN 절을 적절히 활용해야 함. (Source 530, 535 참조) [cite: 530, 535, 541]"
+    },
+    {
+      "id": 47,
+      "question": "Which two statements are true about the SALES tablespace created with 'CREATE SMALLFILE TABLESPACE ...'?",
+      "options": [
+        "A. It must be smaller than the smallest BIGFILE tablespace",
+        "B. Free space is managed using freelists",
+        "C. Any data files added to the tablespace must have a size of 5 gigabytes",
+        "D. It uses the database default blocksize",
+        "E. It is a locally managed tablespace"
+      ],
+      "answer": [
+        "D",
+        "E"
+      ],
+      "vocabulary": "Locally Managed Tablespace (LMT): 비트맵(Bitmap)을 사용하여 익스텐트(Extent) 관리를 테이블스페이스 헤더에서 직접 수행하는 방식.",
+      "concept": "최신 오라클 버전에서 테이블스페이스 생성 시 기본값은 LMT이며, 별도 지정이 없으면 DB 표준 블록 크기를 따름. [cite: 549, 550, 551]"
+    },
+    {
+      "id": 48,
+      "question": "Which two SQL statements execute successfully regarding column aliases?",
+      "options": [
+        "A. SELECT customer_id AS \"CUSTOMER-ID\", ...",
+        "B. SELECT customer_id AS \"CUSTOMER-ID\", transaction_date AS \"DATE\", amount + 100 DUES FROM transactions;",
+        "C. SELECT customer_id AS CUSTOMER-ID, ...",
+        "D. SELECT customer_id CUSTID, transaction_date TRANS_DATE, amount + 100 DUES FROM transactions;",
+        "E. SELECT customer_id AS 'CUSTOMER-ID', ..."
+      ],
+      "answer": [
+        "B",
+        "D"
+      ],
+      "vocabulary": "Column Alias (컬럼 별칭): 쿼리 결과에서 컬럼 헤더의 이름을 임시로 변경하는 기능.",
+      "concept": "별칭에 공백이나 특수문자(-)가 들어가거나 대소문자를 구분하려면 반드시 큰따옴표(\")를 사용해야 함. [cite: 568, 572, 574]"
+    },
+    {
+      "id": 49,
+      "question": "Based on the UPDATE statement 'SET (job_id, salary) = (SELECT ...)', which two statements are true?",
+      "options": [
+        "A. Employee 100 will have SALARY set to the same value as the SALARY of employee 200",
+        "B. Employee 200 will have JOB_ID set to the same value as the JOB_ID of employee 100",
+        "C. Employee 200 will have SALARY set to the same value as the SALARY of employee 100",
+        "D. Employee 100 will have JOB_ID set to the same value as the JOB_ID of employee 200",
+        "E. Employees 100 and 200 will have the same JOB_ID as before the update command"
+      ],
+      "answer": [
+        "A",
+        "D"
+      ],
+      "vocabulary": "Correlated Update (상호 연관 업데이트): 서브쿼리의 결과를 이용하여 메인 쿼리의 컬럼 값을 갱신하는 것.",
+      "concept": "UPDATE 구문의 WHERE 절 조건과 SET 절 서브쿼리의 조건을 정확히 파악해야 함. (여기서는 직원 100번의 정보를 200번의 정보로 갱신하는 것으로 보임 - 문제 지문 문맥상) [cite: 587, 588]"
+    },
+    {
+      "id": 50,
+      "question": "What will happen upon execution of 'sqlplus hr/hr@orcl @abc.sql'?",
+      "options": [
+        "A. The command succeeds and HR will be connected to the orcl and abc.sql databases",
+        "B. The command succeeds and HR will be connected to the orcl database instance, and the abc.sql script will be executed",
+        "C. The command fails because the script must refer to the full path name",
+        "D. The command fails and reports an error because @ is used twice"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "SQL*Plus Script Execution: '@' 기호를 사용하여 외부 SQL 스크립트 파일을 실행하는 기능.",
+      "concept": "첫 번째 @orcl은 접속할 서비스(TNS Alias)를 의미하고, 두 번째 @abc.sql은 실행할 스크립트 파일을 의미함. 둘 다 올바른 문법임. [cite: 591, 594, 595]"
+    },
+    {
+      "id": 51,
+      "question": "Your database instance is started with an SPFILE. You execute the command 'ALTER SYSTEM SET DB_CACHE_SIZE=100K;'. Where is the value changed?",
+      "options": [
+        "A. In the SPFILE, PFILE, and memory",
+        "B. In the SPFILE and in memory",
+        "C. Only in the SPFILE",
+        "D. Change is applied to the current instance, but does not persist",
+        "E. Only in memory"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "SCOPE=BOTH: SPFILE로 기동된 인스턴스에서 ALTER SYSTEM 명령의 기본 적용 범위.",
+      "concept": "SPFILE 사용 시 SCOPE를 명시하지 않으면 기본적으로 메모리(현재 상태)와 파라미터 파일(재부팅 후) 모두에 변경 사항이 저장됨."
+    },
+    {
+      "id": 52,
+      "question": "Which two statements are true regarding Oracle database space management within blocks managed by Automatic Segment Space Management (ASSM)?",
+      "options": [
+        "A. PCTFREE defaults to 10% for all blocks in all segments for all compression methods",
+        "B. ASSM assigns blocks to one of four fullness categories based on what percentage of the block is allocated for rows",
+        "C. Update operations always attempt to find blocks with free space appropriate to the length of the row being updated",
+        "D. Insert operations always attempt to find blocks with free space appropriate to the length of the row being inserted",
+        "E. A block will always be eligible for inserts if the row is short enough to fit into the block"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "ASSM (Automatic Segment Space Management): 비트맵(Bitmap)을 사용하여 블록의 여유 공간을 자동으로 관리하는 방식.",
+      "concept": "ASSM은 프리리스트(Freelist) 대신 비트맵을 사용하여 여유 공간을 탐색하며, 업데이트 시 적절한 공간을 가진 블록을 자동으로 찾아줌."
+    },
+    {
+      "id": 53,
+      "question": "Which two statements must be true so that the SALES user can create tables in the SALES_Q1 tablespace?",
+      "options": [
+        "A. The sales user must have a quota on the TEMP tablespace",
+        "B. The sales user must have a quota on the SALES_Q1 tablespace",
+        "C. The sales user must have been granted the CREATE SESSION privilege",
+        "D. The sales user must have their quota on the users tablespace removed",
+        "E. The sales user must have been granted the CREATE TABLE privilege"
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "QUOTA (할당량): 특정 테이블스페이스에서 사용자가 사용할 수 있는 저장 공간의 한도.",
+      "concept": "테이블을 생성하려면 'CREATE TABLE' 시스템 권한과 해당 테이블스페이스에 대한 물리적 저장 공간(Quota)이 반드시 필요함."
+    },
+    {
+      "id": 54,
+      "question": "Which two statements are true about Enterprise Manager Database Express?",
+      "options": [
+        "A. It is available only when the database is open",
+        "B. It can be used to perform database recovery",
+        "C. The same port number can be used for Database Express configurations for databases on different hosts",
+        "D. It can be used to switch a database into ARCHIVELOGMODE",
+        "E. The same port number can be used for multiple Database Express configurations for multiple databases on the same host"
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "EM Express: 오라클 데이터베이스 12c부터 제공되는 경량화된 웹 기반 관리 도구.",
+      "concept": "EM Express는 데이터베이스 내부의 XDB 기능을 사용하므로 DB가 OPEN 상태여야 하며, 호스트가 다르면 포트 번호가 같아도 상관없음."
+    },
+    {
+      "id": 55,
+      "question": "In the promotions table, the PROMO_BEGIN_DATE column is of data type DATE. Which two statements are true about expressions using this column?",
+      "options": [
+        "A. TO_NUMBER(promo_begin_date) - 5 will return a number",
+        "B. promo_begin_date - sysdate will return a number",
+        "C. promo_begin_date - sysdate will return an error",
+        "D. promo_begin_date - 5 will return a date",
+        "E. TO_DATE(promo_begin_date) * 5 will return a date"
+      ],
+      "answer": [
+        "B",
+        "D"
+      ],
+      "vocabulary": "Date Arithmetic (날짜 연산): 날짜 데이터 타입끼리 혹은 날짜와 숫자로 수행하는 산술 연산.",
+      "concept": "'날짜 - 날짜'는 일수(Days) 차이를 나타내는 숫자를 반환하며, '날짜 - 숫자'는 해당 일수만큼 이전의 날짜를 반환함."
+    },
+    {
+      "id": 56,
+      "question": "Which two statements are true about the results of using the INTERSECT operator in compound queries?",
+      "options": [
+        "A. Column names in each SELECT in the compound query can be different",
+        "B. The number of columns in each SELECT in the compound query can be different",
+        "C. Reversing the order of the intersected tables can sometimes affect the output",
+        "D. INTERSECT returns rows common to both sides of the compound query",
+        "E. INTERSECT ignores NULLs"
+      ],
+      "answer": [
+        "A",
+        "D"
+      ],
+      "vocabulary": "INTERSECT (교집합): 두 쿼리의 결과 집합에서 공통적으로 존재하는 행만 반환하는 집합 연산자.",
+      "concept": "컬럼의 개수와 데이터 타입은 일치해야 하지만 이름은 달라도 되며, 양쪽 모두에 존재하는 데이터만 추출함."
+    },
+    {
+      "id": 57,
+      "question": "In the SALES database, DEFERRED_SEGMENT_CREATION is TRUE. You execute 'CREATE TABLE T1...'. Which segment or segments are created?",
+      "options": [
+        "A. T1, an index segment for the primary key, a LOB segment, and a lobindex segment",
+        "B. No segments are created",
+        "C. T1 only",
+        "D. T1 and an index segment created for the primary key only",
+        "E. T1, an index segment for the primary key, and a LOB segment only"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Deferred Segment Creation (지연된 세그먼트 생성): 테이블 생성 시점이 아닌, 첫 번째 데이터가 입력될 때 물리적 공간을 할당하는 기능.",
+      "concept": "옵션이 TRUE이면 테이블, 인덱스, LOB 등의 객체를 정의(CREATE)해도 실제 데이터(INSERT)가 들어올 때까지 세그먼트를 생성하지 않음."
+    },
+    {
+      "id": 58,
+      "question": "Which two statements are true about the rules of precedence for operators?",
+      "options": [
+        "A. The concatenation operator is always evaluated before addition and subtraction",
+        "B. NULLS influence the precedence of operators in an expression",
+        "C. The + binary operator has the highest precedence in an expression in a SQL statement",
+        "D. Arithmetic operators with equal precedence are evaluated from left to right within an expression",
+        "E. Multiple parentheses can be used to override the default precedence of operators in an expression"
+      ],
+      "answer": [
+        "D",
+        "E"
+      ],
+      "vocabulary": "Operator Precedence (연산자 우선순위): 수식 내에서 연산자가 실행되는 순서 (예: 곱셈이 덧셈보다 먼저).",
+      "concept": "우선순위가 같은 연산자는 왼쪽에서 오른쪽으로 진행되며, 괄호 '()'를 사용하면 가장 먼저 연산되도록 강제할 수 있음."
+    },
+    {
+      "id": 59,
+      "question": "Which two statements are true about Enterprise Manager (EM) Express?",
+      "options": [
+        "A. You can use a single instance of EM Express to manage multiple databases running on the same server.",
+        "B. EM Express uses a separate repository database to store target database metadata.",
+        "C. By default, EM express is available for a database after database creation using DBCA.",
+        "D. You can shut down a database instance using EM Express.",
+        "E. You cannot start up a database instance using EM Express."
+      ],
+      "answer": [
+        "C",
+        "D"
+      ],
+      "vocabulary": "DBCA Configuration: DBCA로 데이터베이스 생성 시 EM Express 포트(기본 5500)를 자동으로 구성함.",
+      "concept": "EM Express는 별도의 리포지토리 없이 DB 내부 메타데이터를 사용하며, 기본적인 시작/종료 관리 기능을 제공함."
+    },
+    {
+      "id": 60,
+      "question": "Which statement is true about aggregate functions?",
+      "options": [
+        "A. Aggregate functions can be nested to any number of levels",
+        "B. The AVG function implicitly converts NULLS to zero",
+        "C. Aggregate functions can be used in any clause of a SELECT statement",
+        "D. The MAX and MIN functions can be used on columns with character data types"
+      ],
+      "answer": [
+        "D"
+      ],
+      "vocabulary": "MAX/MIN Functions: 숫자뿐만 아니라 문자(알파벳 순), 날짜(시간 순) 데이터에도 사용 가능한 집계 함수.",
+      "concept": "집계 함수는 기본적으로 NULL을 무시하며(AVG 등), 문자열 컬럼에 사용 시 사전 순서상 가장 뒤/앞에 있는 값을 반환함."
+    },
+    {
+      "id": 61,
+      "question": "Which three statements are true about the Oracle Data Dictionary?",
+      "options": [
+        "A. Data dictionary views are created by joins of dictionary base tables and DBA-defined tables",
+        "B. The data dictionary is created and maintained by the database administrator",
+        "C. Views with the same name but different prefixes, such as CDB, DBA, ALL and USER, reference the same base tables",
+        "D. Base tables can be queried directly",
+        "E. It is owned by the SYSTEM user",
+        "F. Usernames of all users including database administrators are stored in the data dictionary"
+      ],
+      "answer": [
+        "C",
+        "F",
+        "D"
+      ],
+      "vocabulary": "Data Dictionary Views: USER_(내 것), ALL_(접근 가능), DBA_(전체) 접두어를 가진 시스템 뷰.",
+      "concept": "모든 뷰는 동일한 베이스 테이블을 참조하며, 사용자 정보 등 DB의 모든 메타데이터가 여기에 저장됨."
+    },
+    {
+      "id": 62,
+      "question": "Examine the command: 'ALTER DATABASE MOVE DATAFILE ...'. Which two statements are true?",
+      "options": [
+        "A. DML may be performed on tables with one or more extents in this data file during the execution of this command.",
+        "B. The tablespace containing the datafile must be altered READ ONLY before executing the command.",
+        "C. The tablespace containing the datafile must be altered OFFLINE before executing the command.",
+        "D. If Oracle Managed Files (OMF) is used, then the file is renamed but moved to DB_CREATE_FILE_DEST.",
+        "E. The file is renamed and stored in the same location"
+      ],
+      "answer": [
+        "A",
+        "E"
+      ],
+      "vocabulary": "Online Datafile Move: 12c부터 도입된 기능으로, 데이터 파일을 온라인 상태에서 이동하거나 이름을 변경할 수 있음.",
+      "concept": "파일 이동 중에도 락(Lock)을 최소화하여 사용자의 DML 작업이 차단되지 않음."
+    },
+    {
+      "id": 63,
+      "question": "You need to calculate the number of days from 1st January 2019 until today. Which two queries give the required output?",
+      "options": [
+        "A. SELECT TO_CHAR(SYSDATE, 'DD-MON-YYYY') - '01-JAN-2019' FROM DUAL;",
+        "B. SELECT ROUND(SYSDATE - '01-JAN-2019') FROM DUAL;",
+        "C. SELECT ROUND(SYSDATE - TO_DATE('01/JANUARY/2019', 'DD/MONTH/YYYY')) FROM DUAL;",
+        "D. SELECT TO_DATE(SYSDATE, 'DD/MONTH/YYYY') - '01/JANUARY/2019' FROM DUAL;",
+        "E. SELECT SYSDATE - TO_DATE('01-JANUARY-2019', 'DD-MONTH-YYYY') FROM DUAL;"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "SYSDATE: 현재 시스템의 날짜와 시간을 반환하는 함수.",
+      "concept": "날짜 계산을 위해서는 문자열을 반드시 TO_DATE로 변환하여 SYSDATE와 연산해야 함."
+    },
+    {
+      "id": 64,
+      "question": "Which three statements are true about dropping and unused columns in an Oracle database?",
+      "options": [
+        "A. A primary key column referenced by another column as a foreign key can be dropped if using the CASCADE option.",
+        "B. An UNUSED column's space is reclaimed automatically when the block containing that column is next queried.",
+        "C. An UNUSED column's space is reclaimed automatically when the row containing that column is next queried.",
+        "D. Partition key columns cannot be dropped.",
+        "E. A DROP COLUMN command can be rolled back.",
+        "F. A column that is set to UNUSED still counts towards the limit of 1000 columns per table."
+      ],
+      "answer": [
+        "A",
+        "D",
+        "F"
+      ],
+      "vocabulary": "SET UNUSED: 컬럼을 삭제하는 대신 '사용 안 함'으로 표시하여 논리적으로만 제거하는 명령어.",
+      "concept": "UNUSED 된 컬럼은 물리적으로 공간을 차지하고 컬럼 개수 제한에도 포함되지만, 사용자에게는 보이지 않음."
+    },
+    {
+      "id": 65,
+      "question": "Which three activities are recorded in the database alert log?",
+      "options": [
+        "A. Data Definition Language (DDL) statements",
+        "B. Non-default database parameters",
+        "C. Block corruption errors",
+        "D. Deadlock errors",
+        "E. Session logins and logouts"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ],
+      "vocabulary": "Alert Log (알러트 로그): 데이터베이스의 생명 주기와 중요 오류를 기록하는 텍스트 파일.",
+      "concept": "시작 시 파라미터 정보, 내부 오류(ORA-600), 블록 손상, 데드락(ORA-60) 등 관리자가 알아야 할 핵심 정보가 기록됨."
+    },
+    {
+      "id": 66,
+      "question": "You must create a tablespace of non-standard block size (e.g., 32K). Which requirement must be met?",
+      "options": [
+        "A. db_32k_cache_size should be set to a value greater than db_cache_size.",
+        "B. db_32k_cache_size must be set to a value that can be accommodated in the SGA.",
+        "C. db_32k_cache_size must be less than db_cache_size.",
+        "D. db_cache_size must be set to a size that is smaller than db_32k_cache_size."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Non-Standard Block Size (비표준 블록 크기): 기본 DB 블록 크기(예: 8K)와 다른 크기의 테이블스페이스.",
+      "concept": "비표준 블록 테이블스페이스를 생성하려면 해당 크기에 맞는 버퍼 캐시(DB_nK_CACHE_SIZE)가 메모리에 할당되어 있어야 함."
+    },
+    {
+      "id": 67,
+      "question": "While one of your databases was in mount state, the datafiles were renamed using ALTER DATABASE RENAME FILE. Which statement is true after opening?",
+      "options": [
+        "A. DBA_DATA_FILES displays the old name for the data files because the dictionary was not updated.",
+        "B. V$DATAFILE displays the old names.",
+        "C. DBA_DATA_FILES displays both new and old names.",
+        "D. DBA_DATA_FILES displays the new name correctly.",
+        "E. You must confirm the change in the control file."
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "Control File vs Dictionary: 제어 파일은 물리적 파일 위치를, 데이터 사전은 논리적 메타데이터를 저장.",
+      "concept": "과거 버전이나 특정 상황에서 MOUNT 상태의 파일명 변경은 제어 파일만 갱신하고 데이터 사전(SYSTEM 테이블스페이스)을 갱신하지 못해 불일치가 발생할 수 있음."
+    },
+    {
+      "id": 68,
+      "question": "How do you execute the command so that only SCOTT in BOSTON_DB can access the SCOTT schema in DALLAS_DB?",
+      "options": [
+        "A. Create a PUBLIC database link",
+        "B. Create a PRIVATE database link as SCOTT in BOSTON_DB",
+        "C. Create a database link as SYS in DALLAS_DB",
+        "D. Use a shared database link"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Private Database Link: 특정 사용자만이 소유하고 사용할 수 있는 데이터베이스 연결 링크.",
+      "concept": "'PUBLIC' 키워드 없이 생성하면 Private 링크가 되며, 이를 생성한 사용자(SCOTT)만이 원격 DB에 접속할 수 있음."
+    },
+    {
+      "id": 69,
+      "question": "NLS_DATE_FORMAT is set to DD-MON-YY. Which query requires explicit data type conversion?",
+      "options": [
+        "A. SELECT join_date FROM employees WHERE join_date > '10-02-2018';",
+        "B. SELECT join_date || '' || salary FROM employees;",
+        "C. SELECT SUBSTR(join_date, 1, 2) - 10 FROM employees;",
+        "D. SELECT join_date + 20 FROM employees;"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "Explicit Conversion (명시적 변환): TO_DATE, TO_CHAR 함수 등을 사용하여 데이터 타입을 직접 변환하는 것.",
+      "concept": "비교하려는 문자열('10-02-2018')의 형식이 NLS_DATE_FORMAT('DD-MON-YY')과 다르기 때문에 자동 변환이 실패하거나 오류가 발생함."
+    },
+    {
+      "id": 70,
+      "question": "You want to display details of rows where START_DATE is within the last 25 months. Which WHERE clause is valid?",
+      "options": [
+        "A. WHERE MONTHS_BETWEEN(SYSDATE, start_date) <= 25",
+        "B. WHERE ADD_MONTHS(start_date, 25) <= SYSDATE",
+        "C. WHERE TO_NUMBER(start_date - SYSDATE) <= 25",
+        "D. WHERE MONTHS_BETWEEN(start_date, SYSDATE) <= 25"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "MONTHS_BETWEEN(d1, d2): 두 날짜 d1과 d2 사이의 개월 수를 반환하는 함수 (d1 - d2).",
+      "concept": "오늘(SYSDATE)에서 과거 날짜(START_DATE)를 빼야 양수가 나오며, 이 값이 25 이하인지 확인해야 함."
+    },
+    {
+      "id": 71,
+      "question": "Which three statements are true about sequences in a single instance Oracle database?",
+      "options": [
+        "A. Sequences can always have gaps.",
+        "B. A sequence can issue duplicate values.",
+        "C. A sequence's unallocated cached values are lost if the instance shuts down.",
+        "D. Two or more tables cannot have keys generated from the same sequence.",
+        "E. A sequence can only be dropped by a DBA.",
+        "F. A sequence number that was allocated can be rolled back if a transaction fails."
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "vocabulary": "Sequence Gaps (시퀀스 결번): 롤백, 시스템 종료 등으로 인해 번호가 연속되지 않고 건너뛰는 현상.",
+      "concept": "시퀀스는 CYCLE 옵션 시 중복될 수 있고(B), 메모리(Cache)에 미리 할당된 번호는 인스턴스 종료 시 사라짐(C)."
+    },
+    {
+      "id": 72,
+      "question": "You want to execute 'ALTER TABLESPACE sales_q1 ADD DATAFILE;' without specifying a file name. Which two actions ensure success?",
+      "options": [
+        "A. Ensure DB_RECOVERY_FILE_DEST is set",
+        "B. Specify a path in the DATAFILE clause (overriding OMF)",
+        "C. Ensure that DB_CREATE_FILE_DEST specifies a location with available space",
+        "D. Add the AUTOEXTEND ON clause",
+        "E. Use the BIGFILE keyword"
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "DB_CREATE_FILE_DEST: OMF(Oracle Managed Files) 기능을 사용할 때 데이터 파일이 생성될 기본 디렉토리 경로.",
+      "concept": "파일명을 생략하려면 OMF 경로가 설정되어 있어야 하며(C), 그렇지 않으면 파일명을 직접 명시해야 함(B)."
+    },
+    {
+      "id": 73,
+      "question": "Which statement is true about substitution variables?",
+      "options": [
+        "A. A substitution variable prefixed with & always prompts only once.",
+        "B. A substitution variable prefixed with && prompts only once for a value in a session.",
+        "C. A substitution variable can be used only in a select statement.",
+        "D. A substitution variable used to prompt for a column name must be enclosed in single quotation marks."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Substitution Variable (치환 변수): SQL 실행 시 사용자로부터 값을 입력받는 변수 (& 또는 &&).",
+      "concept": "'&'는 실행할 때마다 값을 묻지만, '&&'는 처음 한 번만 묻고 그 값을 세션 내내 유지(DEFINE)함."
+    },
+    {
+      "id": 74,
+      "question": "In which three situations does a new transaction always start?",
+      "options": [
+        "A. when issuing a SELECT FOR UPDATE statement",
+        "B. when issuing a TRUNCATE statement",
+        "C. when issuing a CREATE TABLE statement",
+        "D. when issuing the first Data Manipulation Language (DML) statement after a COMMIT or ROLLBACK",
+        "E. when issuing a SET TRANSACTION statement",
+        "F. when issuing a SELECT statement"
+      ],
+      "answer": [
+        "A",
+        "D",
+        "E"
+      ],
+      "vocabulary": "Transaction Boundary (트랜잭션 경계): 트랜잭션이 시작되고 끝나는 지점.",
+      "concept": "트랜잭션은 첫 DML, SELECT FOR UPDATE, 또는 SET TRANSACTION 명령어로 시작되며, COMMIT/ROLLBACK/DDL로 종료됨."
+    },
+    {
+      "id": 75,
+      "question": "Which two statements are true about Oracle synonyms?",
+      "options": [
+        "A. A synonym has an object number.",
+        "B. A synonym can be created on an object in a package.",
+        "C. A synonym can have a synonym.",
+        "D. All private synonym names must be unique in the database.",
+        "E. Any user can create a PUBLIC synonym."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Object Number (객체 번호): 데이터베이스 내의 모든 객체(테이블, 뷰, 시노님 등)에 부여되는 고유 식별자.",
+      "concept": "시노님도 하나의 독립된 객체이므로 ID를 가지며(A), 시노님이 다른 시노님을 가리키도록(Chain) 만들 수 있음(C)."
+    },
+    {
+      "id": 76,
+      "question": "Which three instance situations are possible with the Oracle Database server without multi-tenant?",
+      "options": [
+        "A. two or more instances on separate servers all associated with one database",
+        "B. one instance on one server associated with one database",
+        "C. one instance on one server associated with two or more databases on the same server",
+        "D. one instance on one server not associated with any database",
+        "E. one instance on one server associated with two or more databases on separate servers"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "vocabulary": "RAC (Real Application Clusters): 여러 서버의 인스턴스가 하나의 데이터베이스를 공유하여 고가용성과 확장성을 제공하는 구조.",
+      "concept": "비멀티테넌트 환경에서 인스턴스는 하나의 DB만 마운트할 수 있지만(B), RAC를 통해 여러 인스턴스가 하나의 DB를 열 수 있음(A)."
+    },
+    {
+      "id": 77,
+      "question": "Examine the description of the product_details table. Which two statements are true?",
+      "options": [
+        "A. PRODUCT_ID can be assigned the PRIMARY KEY constraint.",
+        "B. PRODUCT_PRICE contains the value zero by default if no value is assigned to it.",
+        "C. PRODUCT_PRICE can be used in an arithmetic expression even if it has no value stored in it.",
+        "D. EXPIRY_DATE contains the sysdate by default if no date is assigned to it.",
+        "E. PRODUCT_NAME cannot contain duplicate values.",
+        "F. EXPIRY_DATE cannot be used in arithmetic expressions."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Arithmetic with NULL: 산술 연산에 NULL이 포함되면 결과는 항상 NULL이 되지만, 식(Expression) 자체는 문법적으로 유효함.",
+      "concept": "NULL 값이 들어있는 숫자 컬럼도 연산식에 사용할 수 있으며(결과는 NULL), 식별자 역할을 하는 컬럼에는 기본키 제약조건을 걸 수 있음."
+    },
+    {
+      "id": 78,
+      "question": "Which two statements are true about the sqlldr execution described?",
+      "options": [
+        "A. It overwrites data in EMP with data in EMP.DAT",
+        "B. It uses the database buffer cache to load data",
+        "C. It generates a log that contains control file entries, which can be used with normal SQL*Loader operations",
+        "D. It generates a sql script that it uses to load data from EMP.DAT to EMP",
+        "E. It appends data from EMP.DAT to EMP"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "SQL*Loader Express Mode: 별도의 컨트롤 파일 없이 테이블 이름만으로 데이터를 로드하는 간편 모드.",
+      "concept": "Express Mode는 기본적으로 데이터를 추가(APPEND)하며, 실행 과정에서 생성된 로그 파일에 향후 사용 가능한 컨트롤 파일 구문이 포함됨."
+    },
+    {
+      "id": 79,
+      "question": "Which three functions are performed by dispatchers in a shared server configuration?",
+      "options": [
+        "A. writing inbound request to the common request queue from all shared server connections",
+        "B. checking for outbound shared server responses on the common outbound response queue",
+        "C. receiving inbound requests from processes using shared server connections",
+        "D. sending each connection input request to the appropriate shared server input queue",
+        "E. broadcasting shared server session responses back to requesters on all connections",
+        "F. sending shared server session responses back to requesters on the appropriate connection"
+      ],
+      "answer": [
+        "A",
+        "C",
+        "F"
+      ],
+      "vocabulary": "Dispatcher (디스패처): 클라이언트의 요청을 받아 요청 큐(Request Queue)에 넣고, 처리 결과를 클라이언트에게 돌려주는 프로세스.",
+      "concept": "공유 서버 환경에서 디스패처는 클라이언트와 직접 통신하며 요청을 접수하고, 공유 서버 프로세스가 처리한 응답을 전달하는 역할을 함."
+    },
+    {
+      "id": 80,
+      "question": "Which three statements are true about the Oracle join and ANSI join syntax?",
+      "options": [
+        "A. The Oracle join syntax supports creation of a Cartesian product of two tables",
+        "B. The Oracle join syntax performs better than the SQL: 1999 compliant ANSI join syntax",
+        "C. The SQL: 1999 compliant ANSI join syntax supports natural joins",
+        "D. The SQL: 1999 compliant ANSI join syntax supports creation of a Cartesian product of two tables",
+        "E. The Oracle join syntax only supports right outer joins",
+        "F. The Oracle join syntax supports natural joins",
+        "G. The Oracle join syntax performs less well than the SQL: 1999 compliant ANSI join syntax"
+      ],
+      "answer": [
+        "A",
+        "C",
+        "D"
+      ],
+      "vocabulary": "Cartesian Product (카테시안 곱): 조인 조건이 없을 때 두 테이블의 모든 행을 서로 결합하는 것 (행 개수 = A행 * B행).",
+      "concept": "오라클 구문(콤마 구분)과 ANSI 구문(CROSS JOIN) 모두 카테시안 곱을 지원하며, 성능상 차이는 없음."
+    },
+    {
+      "id": 81,
+      "question": "You want to display PROD_IDS whose promotion cost is less than the highest cost PROD_ID in a promotion time interval. What will be the result of the SQL statement?",
+      "options": [
+        "A. It gives an error because the ALL keyword is not valid",
+        "B. It gives an error because the GROUP BY clause is not valid",
+        "C. It executes successfully but does not give the required result",
+        "D. It executes successfully and gives the required result"
+      ],
+      "answer": [
+        "D"
+      ],
+      "vocabulary": "ALL Operator: 서브쿼리의 모든 결과값과 비교하여 조건을 만족해야 함 (예: < ALL은 최솟값보다 작아야 함).",
+      "concept": "서브쿼리 내의 GROUP BY 절에 수식(promo_end_date - promo_begin_date)을 사용하는 것은 유효하며 정상 실행됨."
+    },
+    {
+      "id": 82,
+      "question": "You want to display all cities that contain the string 'an'. The cities must be returned in ascending order, with the last names further sorted in descending order. Which two clauses must you add?",
+      "options": [
+        "A. ORDER BY 1, LNAME DESC",
+        "B. ORDER BY 1, 2",
+        "C. WHERE city LIKE '%an%'",
+        "D. WHERE city = '%an%'",
+        "E. WHERE city IN ('%an%')",
+        "F. ORDER BY last_name DESC, city ASC"
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "ORDER BY Positional Notation: 컬럼 이름 대신 SELECT 절의 순서(1, 2, ...)로 정렬 기준을 지정하는 방법.",
+      "concept": "SELECT city, last_name ... 에서 city는 1번이므로 'ORDER BY 1'은 도시 오름차순, 'LNAME DESC'는 성 내림차순을 의미함."
+    },
+    {
+      "id": 83,
+      "question": "Identify three ORDER BY clauses, any one of which can complete the query successfully using UNION.",
+      "options": [
+        "A. ORDER BY \"Last Name\"",
+        "B. ORDER BY 2, 1",
+        "C. ORDER BY 2, cust_id",
+        "D. ORDER BY CUST_NO",
+        "E. ORDER BY \"CUST_NO\""
+      ],
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ],
+      "vocabulary": "Set Operator Sorting: 집합 연산자(UNION 등) 사용 시 ORDER BY는 마지막 문장에만 올 수 있음.",
+      "concept": "정렬 기준으로는 첫 번째 SELECT 문의 컬럼명, 별칭(Alias), 또는 위치 번호(Position)를 사용할 수 있음."
+    },
+    {
+      "id": 84,
+      "question": "Which two tasks require subqueries?",
+      "options": [
+        "A. Display the number of products whose PROD_LIST_PRICE is more than the average PROD_LIST_PRICE",
+        "B. Display suppliers whose PROD_LIST_PRICE is less than 1000",
+        "C. Display products whose PROD_MIN_PRICE is more than the average PROD_LIST_PRICE of all products, and whose status is orderable",
+        "D. Display the total number of products supplied by supplier 102 which have a product status of obsolete",
+        "E. Display the minimum PROD_LIST_PRICE for each product status"
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Subquery for Aggregation: 집계 함수(AVG 등)의 결과를 WHERE 절에서 비교값으로 사용하기 위해 필요한 쿼리.",
+      "concept": "WHERE 절에서는 집계 함수를 직접 쓸 수 없으므로, 평균값을 먼저 구하는 서브쿼리가 반드시 필요함."
+    },
+    {
+      "id": 85,
+      "question": "Which compression method is recommended for Direct-Path Insert operations?",
+      "options": [
+        "A. COLUMN STORE COMPRESS BASIC",
+        "B. COLUMN STORE COMPRESS ADVANCED",
+        "C. ROW STORE COMPRESS BASIC",
+        "D. ROW STORE COMPRESS ADVANCED"
+      ],
+      "answer": [
+        "C"
+      ],
+      "vocabulary": "Basic Compression: Direct-Path Insert(대량 데이터 로드) 시에만 압축이 수행되는 방식.",
+      "concept": "ROW STORE COMPRESS BASIC(구 'COMPRESS')은 CPU 오버헤드가 적고 대량 로드 시 효율적임. DML 작업 시에는 압축되지 않음."
+    },
+    {
+      "id": 86,
+      "question": "Which two statements are true about UNDO and REDO?",
+      "options": [
+        "A. The generation of UNDO generates REDO",
+        "B. DML modifies Oracle database objects and only generates UNDO",
+        "C. The generation of REDO generates UNDO",
+        "D. DML modifies Oracle database objects and only generates REDO",
+        "E. DML modifies Oracle database objects and generates UNDO and REDO"
+      ],
+      "answer": [
+        "A",
+        "E"
+      ],
+      "vocabulary": "Redo for Undo: 언두 데이터 자체도 변경 사항이므로 복구를 위해 리두 로그에 기록됨.",
+      "concept": "DML 발생 시 데이터 변경에 대한 Redo, 그리고 변경 전 이미지(Undo) 생성에 대한 Redo가 모두 생성됨."
+    },
+    {
+      "id": 87,
+      "question": "Which three statements are true about the naming methods supported by Oracle database?",
+      "options": [
+        "A. Local naming can be used if Connect-Time Failover is required.",
+        "B. A client can connect to an Oracle database instance even if no client side network admin has been configured.",
+        "C. Directory Naming requires setting the TNS_ADMIN environment variable on the client side.",
+        "D. Local Naming requires setting the TNS_ADMIN environment variable on the client side.",
+        "E. Directory Naming can be used if Connect-Time Failover is required.",
+        "F. Easy Connect supports TCP/IP and SSL."
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "vocabulary": "Easy Connect: 별도 설정 없이 '호스트:포트/서비스명' 형식으로 간단히 DB에 접속하는 방식.",
+      "concept": "클라이언트 설정이 없어도 Easy Connect로 접속 가능하며(B), 로컬 네이밍(tnsnames.ora)은 페일오버 구성을 지원함(A)."
+    },
+    {
+      "id": 88,
+      "question": "Which three are types of segments in an Oracle Database?",
+      "options": [
+        "A. undo",
+        "B. index",
+        "C. stored procedures",
+        "D. sequences",
+        "E. tables",
+        "F. clusters"
+      ],
+      "answer": [
+        "A",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Segment (세그먼트): 데이터베이스 내에서 물리적인 저장 공간을 차지하는 객체 단위.",
+      "concept": "테이블, 인덱스, 언두, 클러스터 등은 데이터를 저장하므로 세그먼트가 있지만, 뷰나 프로시저, 시퀀스는 메타데이터만 있어 세그먼트가 없음."
+    },
+    {
+      "id": 89,
+      "question": "You execute this query: SELECT TO_CHAR(NEXT_DAY(LAST_DAY(SYSDATE), 'MON'), 'dd \"Monday for\" fmMonth rrrr') ... What is the result?",
+      "options": [
+        "A. It executes successfully but does not return any result",
+        "B. It returns the date for the first Monday of the next month",
+        "C. It generates an error",
+        "D. It returns the date for the last Monday of the current month"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "NEXT_DAY: 기준 날짜 이후에 돌아오는 첫 번째 요일의 날짜를 반환하는 함수.",
+      "concept": "LAST_DAY(SYSDATE)는 이 달의 마지막 날이므로, 그 이후의 첫 월요일은 '다음 달의 첫 번째 월요일'이 됨."
+    },
+    {
+      "id": 90,
+      "question": "Which two statements are true about User Authentication in an Oracle Database?",
+      "options": [
+        "A. Operating System authentication may be used for system-privileged administrative users.",
+        "B. REMOTE_LOGIN_PASSWORDFILE must be set to exclusive to permit password changes for system-privileged administrative users.",
+        "C. Password authentication must be used for system-privileged administrative users.",
+        "D. Password File authentication must be used for system-privileged administrative users.",
+        "E. Password File authentication is supported for any type of database user."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "OS Authentication: 운영체제 로그인 정보를 신뢰하여 별도 DB 암호 없이 접속을 허용하는 방식 (예: sqlplus / as sysdba).",
+      "concept": "관리자(SYSDBA 등)는 OS 인증을 사용할 수 있으며, 일반적인 패스워드 인증 방식도 당연히 지원됨."
+    },
+    {
+      "id": 91,
+      "question": "Which four account management capabilities can be configured using Oracle profiles?",
+      "options": [
+        "A. the number of hours for which an account is locked after the configured number of login attempts has been reached",
+        "B. the number of days for which an account may be inactive before it is locked",
+        "C. the maximum amount of CPU time allowed for a user's sessions before their account is locked",
+        "D. the ability to prevent a password from ever being reused",
+        "E. the number of password changes required within a period of time before a password can be reused",
+        "F. the number of days for which an account is locked after the configured number of login attempts has been reached",
+        "G. the maximum number of sessions permitted for a user before the account is locked"
+      ],
+      "answer": [
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "vocabulary": "Profile (프로파일): 사용자의 리소스 사용량(CPU, 세션 수)과 암호 정책(만료, 재사용, 잠금)을 제어하는 설정 집합.",
+      "concept": "프로파일을 통해 암호 재사용 금지(D), 변경 주기 강제(E), 로그인 실패 시 잠금 기간(F), 동시 접속 세션 수 제한(G) 등을 설정할 수 있음."
+    },
+    {
+      "id": 92,
+      "question": "Which two statements are true about undo and undo tablespaces?",
+      "options": [
+        "A. There can be only one undo tablespace created in a database.",
+        "B. An instance will crash if the active undo tablespace is lost.",
+        "C. An undo tablespace may be owned by only one instance.",
+        "D. undo segments are owned by SYSTEM.",
+        "E. undo segments are owned by SYSBACKUP."
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "Instance Recovery Requirement: 활성 언두 테이블스페이스는 트랜잭션 롤백과 인스턴스 복구에 필수적임.",
+      "concept": "RAC 환경에서 각 인스턴스는 자신만의 언두 테이블스페이스를 소유하며(C), 이것이 손실되면 인스턴스는 정상 작동할 수 없음(B)."
+    },
+    {
+      "id": 93,
+      "question": "Examine this command: SQL> ALTER TABLE ORDERS SHRINK SPACE COMPACT. Which two statements are true?",
+      "options": [
+        "A. The high-water mark (HWM) of orders is adjusted.",
+        "B. Only queries are allowed on ORDERS while the shrink is executing.",
+        "C. Queries and DML statements are allowed on ORDERS while the shrink is executing.",
+        "D. The shrink operation causes rows to be moved to empty space starting from the beginning of the orders segment.",
+        "E. Dependent indexes become UNUSABLE.",
+        "F. The shrink operation causes rows to be moved to empty space starting toward the end of the orders segment."
+      ],
+      "answer": [
+        "C",
+        "D"
+      ],
+      "vocabulary": "SHRINK SPACE COMPACT: 세그먼트 축소의 1단계로, HWM(고수위)은 내리지 않고 데이터 조각 모음만 수행하는 옵션.",
+      "concept": "이 단계에서는 HWM 이동으로 인한 락이 걸리지 않아 DML 작업이 가능하며(C), 데이터를 앞쪽 빈 공간으로 이동시킴(D)."
+    },
+    {
+      "id": 94,
+      "question": "Which three files are used by conventional path SQL*Loader when the TABLE option is not specified?",
+      "options": [
+        "A. dump files",
+        "B. control files",
+        "C. password files",
+        "D. bad files",
+        "E. input files"
+      ],
+      "answer": [
+        "B",
+        "D",
+        "E"
+      ],
+      "vocabulary": "Control File (SQL*Loader): 데이터 로드 방법, 파일 위치, 컬럼 매핑 등을 정의한 지시 파일.",
+      "concept": "기본적인 SQL*Loader 작업에는 데이터 파일(Input), 제어 파일(Control), 그리고 오류 데이터를 저장할 배드 파일(Bad)이 관여함."
+    },
+    {
+      "id": 95,
+      "question": "Which three statements are true about Deferred Segment Creation in Oracle databases?",
+      "options": [
+        "A. It Is supported for Index Organized Tables (IOTs) contained in locally managed tablespaces.",
+        "B. Sessions may dynamically switch back and forth from deferred to immediate segment creation.",
+        "C. It Is the default behavior for tables and indexes.",
+        "D. It is supported for SYS-owned tables contained in locally managed tablespaces.",
+        "E. Indexes inherit the deferred or immediate segment creation attribute from their parent table"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Deferred Segment Creation Default: 11gR2부터 도입된 기능으로, 기본적으로 테이블 생성 시 세그먼트를 만들지 않음.",
+      "concept": "이 기능은 기본값(True)이며(C), 인덱스는 테이블 설정을 따라가고(E), 세션 레벨에서 설정을 변경할 수 있음(B)."
+    },
+    {
+      "id": 96,
+      "question": "You want to use table compression suitable for OLTP that will compress rows for all DML statements and minimize overhead. Which option is best?",
+      "options": [
+        "A. COLUMN STORE COMPRESS FOR QUERY LOW",
+        "B. ROW STORE COMPRESS BASIC",
+        "C. COLUMN STORE COMPRESS FOR ARCHIVE LOW",
+        "D. COLUMN STORE COMPRESS FOR ARCHIVE HIGH",
+        "E. ROW STORE COMPRESS ADVANCED"
+      ],
+      "answer": [
+        "E"
+      ],
+      "vocabulary": "Advanced Row Compression: 모든 DML 작업(Insert, Update) 시 실시간으로 압축을 수행하며 OLTP 환경에 최적화된 방식.",
+      "concept": "Basic Compression은 Direct Load시에만 작동하므로, 일반적인 DML 작업에도 압축을 적용하려면 Advanced Row Compression을 써야 함."
+    },
+    {
+      "id": 97,
+      "question": "You execute: CREATE BIGFILE TABLESPACE big_tbs ... SIZE 20G; Which two statements are true?",
+      "options": [
+        "A. AUTOEXTEND is possible for the datafile",
+        "B. It must be bigger than the largest SMALLFILE tablespace",
+        "C. Additional data files may not be added",
+        "D. It will be a dictionary-managed tablespace by default",
+        "E. It will always have a 32K blocksize"
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Bigfile Tablespace: 오직 하나의 매우 큰 데이터 파일만을 가질 수 있는 테이블스페이스 유형.",
+      "concept": "파일을 추가할 수 없으며(C), 대신 파일 하나가 매우 크게 확장될 수 있고 자동 확장(Autoextend) 설정이 가능함(A)."
+    },
+    {
+      "id": 98,
+      "question": "Which two statements are true about date/time functions in a session where NLS_DATE_FORMAT is set to DD-MON-YYYY HH24:MI:SS?",
+      "options": [
+        "A. CURRENT_TIMESTAMP returns the same date and time as SYSDATE with additional details of fractional seconds",
+        "B. SYSDATE can be queried only from the DUAL table",
+        "C. CURRENT_DATE returns the current date and time as per the session time zone",
+        "D. SYSDATE can be used in expressions only if the default date format is DD-MON-RR",
+        "E. SYSDATE and CURRENT_DATE return the current date and time set for the operating system of the database server",
+        "F. CURRENT_TIMESTAMP returns the same date as CURRENT_DATE"
+      ],
+      "answer": [
+        "C",
+        "F"
+      ],
+      "vocabulary": "Session Time Zone: 클라이언트 세션이 위치한 지역의 시간대 설정.",
+      "concept": "CURRENT_DATE와 CURRENT_TIMESTAMP는 DB 서버 시간이 아닌 세션 시간대(Session Time Zone)를 기준으로 값을 반환함."
+    },
+    {
+      "id": 99,
+      "question": "Which statement is true about the INTERSECT operator used in compound queries?",
+      "options": [
+        "A. Multiple INTERSECT operators are not possible in the same SQL statement",
+        "B. It processes NULLs in the selected columns",
+        "C. INTERSECT is of lower precedence than UNION or UNION ALL",
+        "D. It ignores NULLS"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Set Operators and NULL: 집합 연산자(UNION, INTERSECT, MINUS)는 NULL을 서로 같은 값으로 취급함.",
+      "concept": "비교 연산자(=)와 달리 집합 연산에서는 NULL끼리도 일치하는 것으로 보아 교집합(Intersect) 결과에 포함시킴."
+    },
+    {
+      "id": 100,
+      "question": "You start your database instance in NOMOUNT state. Which two actions are performed?",
+      "options": [
+        "A. The control files are opened.",
+        "B. The consistency of the database is checked.",
+        "C. All required background processes are started.",
+        "D. SYS can access the database.",
+        "E. Memory is allocated for the SGA"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "NOMOUNT State: 인스턴스만 시작된 단계로, 파라미터 파일을 읽어 메모리(SGA)를 할당하고 프로세스를 띄운 상태.",
+      "concept": "아직 컨트롤 파일이나 데이터 파일을 열지 않았으며, 주로 DB 생성이나 컨트롤 파일 복구 시 사용됨."
+    },
+    {
+      "id": 101,
+      "question": "Your database instance is started with a PFILE. You want to increase the size of the buffer cache using 'ALTER SYSTEM SET DB_CACHE_SIZE = 1024M'. What is the outcome?",
+      "options": [
+        "A. The value is changed only in the PFILE and takes effect at the next instance startup",
+        "B. The value is changed for the current instance and in the PFILE",
+        "C. It fails because the SCOPE clause is missing",
+        "D. Change is applied to the current instance, but does not persist"
+      ],
+      "answer": [
+        "D"
+      ],
+      "vocabulary": "PFILE vs SPFILE: PFILE은 텍스트 파일로 직접 수정해야 하며, ALTER SYSTEM 명령으로 영구 변경할 수 없음.",
+      "concept": "PFILE로 기동된 경우, SCOPE=MEMORY가 기본값이 되어 현재 인스턴스에는 즉시 적용되지만 재기동 시 초기화됨."
+    },
+    {
+      "id": 102,
+      "question": "In the spfile, LOCAL_LISTENER is set to LISTENER_1. The TNSNAMES.ORA contains the definition for LISTENER_1. Which statement is true?",
+      "options": [
+        "A. Dynamic service registration cannot be used for this database instance",
+        "B. The LREG process registers services dynamically with the LISTENER_1 listener",
+        "C. LISTENER_1 must also be defined in the LISTENER.ORA file to enable dynamic service registration",
+        "D. There are two listeners named LISTENER and LISTENER_1 running simultaneously",
+        "E. The definition for LISTENER_1 requires a CONNECT_DATA section"
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "LREG (Listener Registration): 데이터베이스 인스턴스 정보를 리스너에 동적으로 등록하는 백그라운드 프로세스.",
+      "concept": "LOCAL_LISTENER 파라미터가 별칭(Alias)을 가리키면, tnsnames.ora를 참조하여 해당 주소의 리스너에 서비스를 등록함."
+    },
+    {
+      "id": 103,
+      "question": "You execute an INSERT statement with a subquery in the VALUES clause: 'INSERT INTO sales VALUES (..., (SELECT channel_id ...), ...)'. Which three statements are true?",
+      "options": [
+        "A. The statement will fail if a row already exists in the sales table for product 23.",
+        "B. The sales table has five foreign keys.",
+        "C. A product can have a different unit price at different times.",
+        "D. A customer can exist in many countries.",
+        "E. The statement will execute successfully and a new row will be inserted into the sales table.",
+        "F. The statement will fail because a subquery may not be contained in a values clause."
+      ],
+      "answer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Scalar Subquery: 단일 행, 단일 컬럼 값을 반환하는 서브쿼리로, INSERT문의 VALUES 절에서도 사용 가능함.",
+      "concept": "서브쿼리가 하나의 값만 반환한다면 문법적으로 유효하며 정상적으로 데이터가 삽입됨."
+    },
+    {
+      "id": 104,
+      "question": "You create a user HR and execute: 'GRANT CREATE SESSION TO hr WITH ADMIN OPTION'. Which three actions can HR perform?",
+      "options": [
+        "A. Revoke the CREATE SESSION privilege from other users",
+        "B. Revoke the CREATE SESSION privilege from user HR",
+        "C. Log in to the database instance",
+        "D. Grant the CREATE SESSION privilege with ADMIN OPTION to other users",
+        "E. Execute DDL statements in the HR schema",
+        "F. Execute DML statements in the HR schema"
+      ],
+      "answer": [
+        "A",
+        "C",
+        "D"
+      ],
+      "vocabulary": "WITH ADMIN OPTION: 시스템 권한 부여 시, 해당 권한을 다른 사용자에게 다시 부여하거나 회수할 수 있는 관리 권한을 함께 줌.",
+      "concept": "HR은 접속 권한(CREATE SESSION)을 얻었을 뿐만 아니라, 이를 다른 유저에게 주거나 뺏을 수 있는 관리자 권한도 가짐."
+    },
+    {
+      "id": 105,
+      "question": "Which three statements are true about the tools used to configure Oracle Net Services?",
+      "options": [
+        "A. The Oracle Net Configuration Assistant is only used when running the Oracle installer",
+        "B. Oracle Net Manager can be used to centrally configure listeners on any database server target",
+        "C. The lsnrctl utility requires a listener.ora file to exist before it is started",
+        "D. Oracle Net Manager can be used to locally configure naming methods on a database server",
+        "E. Enterprise Manager Cloud Control can be used to centrally configure listeners on any managed database server",
+        "F. Enterprise Manager Cloud Control can be used to centrally configure net service names for any database server target"
+      ],
+      "answer": [
+        "D",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Oracle Net Manager: 로컬 호스트의 네트워크 설정(리스너, 서비스 이름 등)을 GUI로 구성하는 도구.",
+      "concept": "개별 서버 설정은 Net Manager로, 여러 서버의 중앙 집중 관리는 Enterprise Manager Cloud Control을 사용함."
+    },
+    {
+      "id": 106,
+      "question": "Which two statements are true about the ORDER BY clause when used with a SQL statement containing a SET operator such as UNION?",
+      "options": [
+        "A. Column positions must be used in the ORDER BY clause",
+        "B. Only column names from the first SELECT statement in the compound query are recognized",
+        "C. The first column in the first SELECT is used by default to sort output in the absence of an ORDER BY clause",
+        "D. Each SELECT statement in the compound query must have its own ORDER BY clause",
+        "E. Each SELECT statement in the compound query can have its own ORDER BY clause"
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "Compound Query Sorting: 집합 연산자로 결합된 쿼리의 정렬 규칙.",
+      "concept": "ORDER BY는 문장의 맨 끝에 한 번만 올 수 있으며, 첫 번째 SELECT 문의 컬럼명이나 별칭을 기준으로 정렬함."
+    },
+    {
+      "id": 107,
+      "question": "Which three statements are true concerning logical and physical database structures?",
+      "options": [
+        "A. All tablespaces may have one or more data files",
+        "B. The extents of a segment must always reside in the same datafile",
+        "C. A smallfile tablespace might be bigger than a bigfile tablespace",
+        "D. A segment can span multiple data files in some tablespaces",
+        "E. A segment's blocks can be of different sizes",
+        "F. A segment might have only one extent",
+        "G. Segments can span multiple tablespaces"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "F"
+      ],
+      "vocabulary": "Extent (익스텐트): 연속된 데이터 블록의 집합으로, 세그먼트 공간 할당의 기본 단위.",
+      "concept": "하나의 익스텐트는 반드시 하나의 데이터 파일 내에 존재해야 하지만(B), 세그먼트는 여러 익스텐트로 구성되므로 여러 파일에 걸칠 수 있음(D와 상충되나 B가 더 정확한 표현)."
+    },
+    {
+      "id": 108,
+      "question": "You want to write a query that prompts for two column names and the WHERE condition each time, but only prompts for the table name the first time. Which query works?",
+      "options": [
+        "A. SELECT &&col1, &&col2 FROM &table ...",
+        "B. SELECT &col1, &col2 FROM &&table WHERE &condition;",
+        "C. SELECT &col1, &col2 FROM \"&table\" ...",
+        "D. SELECT '&&col1', '&&col2' ...",
+        "E. SELECT &&col1, &&col2 FROM &table ..."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "&& vs &: 치환 변수 중 &&는 값을 입력받으면 세션 동안 저장(DEFINE)하고, &는 매번 물어봄.",
+      "concept": "테이블 이름은 한 번만 묻고 재사용해야 하므로 `&&table`을 사용하고, 컬럼과 조건은 매번 달라야 하므로 `&`를 사용함."
+    },
+    {
+      "id": 109,
+      "question": "Which two statements are true about the Automatic Diagnostic Repository (ADR)?",
+      "options": [
+        "A. The ADR base defaults to $ORACLE_HOME/rdbms/admin...",
+        "B. The ADR base defaults to $ORACLE_HOME/dbs...",
+        "C. It supports diagnostics for Automatic Storage Management (ASM)",
+        "D. It supports diagnostics for Oracle Clusterware",
+        "E. It is held inside an Oracle database schema"
+      ],
+      "answer": [
+        "C",
+        "D"
+      ],
+      "vocabulary": "ADR Scope: 오라클 데이터베이스뿐만 아니라 ASM, 리스너, 클러스터웨어 등 오라클 제품군 전체의 진단 데이터를 통합 관리함.",
+      "concept": "ADR은 DB 외부에 파일 형태로 존재하므로 DB 가동 여부와 상관없이 다양한 컴포넌트의 로그를 관리할 수 있음."
+    },
+    {
+      "id": 110,
+      "question": "Which two statements are true about space-saving features in an Oracle Database?",
+      "options": [
+        "A. Private Temporary Tables (PTTs) store metadata in memory only",
+        "B. An index created with the UNUSABLE attribute has no segment",
+        "C. If they exist for a session, Private Temporary Tables (PTTs) are always dropped at the next COMMIT OR ROLLBACK",
+        "D. An index that is altered to be UNUSABLE will retain its segment",
+        "E. A table that is truncated will always have its segment removed"
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "UNUSABLE Index: 인덱스 정의만 남기고 물리적인 저장 공간(세그먼트)을 해제한 상태.",
+      "concept": "대량 데이터 로드 전 인덱스를 UNUSABLE로 만들면 공간과 시간을 절약할 수 있으며, PTT는 트랜잭션/세션 종료 시 자동 정리됨."
+    },
+    {
+      "id": 111,
+      "question": "You want to display the unique promotion costs in each promotion category. Which two queries can be used?",
+      "options": [
+        "A. SELECT promo_cost, promo_category FROM promotions ORDER BY 1;",
+        "B. SELECT DISTINCT promo_cost || ' in ' || DISTINCT promo_category ...",
+        "C. SELECT DISTINCT promo_category || ' has ' || promo_cost AS COSTS FROM promotions ORDER BY 1;",
+        "D. SELECT promo_category, DISTINCT promo_cost ...",
+        "E. SELECT DISTINCT promo_category, promo_cost FROM promotions ORDER BY 1;"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "DISTINCT: 중복된 행을 제거하는 키워드로, SELECT 절의 맨 앞에 위치해야 함.",
+      "concept": "DISTINCT는 특정 컬럼 앞에만 붙일 수 없으며(D 틀림), 결합 연산자(||)로 합친 결과에 대해 중복을 제거할 수도 있음(C)."
+    },
+    {
+      "id": 112,
+      "question": "The CUSTOMERS table has a CUST_CREDIT_LIMIT column of data type NUMBER. Which two queries execute successfully?",
+      "options": [
+        "A. SELECT NVL(cust_credit_limit * .15, 'Not Available') FROM customers;",
+        "B. SELECT NVL2(cust_credit_limit * .15, 'Not Available') ...",
+        "C. SELECT NVL(TO_CHAR(cust_credit_limit * .15), 'Not Available') FROM customers;",
+        "D. SELECT TO_CHAR(NVL(cust_credit_limit * .15, 'Not Available')) ...",
+        "E. SELECT NVL2(cust_credit_limit, TO_CHAR(cust_credit_limit * .15), 'Not Available') FROM customers;"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "NVL Data Types: NVL(expr1, expr2)에서 expr1과 expr2는 호환 가능한 데이터 타입이어야 함.",
+      "concept": "숫자 연산 결과와 문자열('Not Available')을 함께 쓰려면 숫자를 문자로 변환(TO_CHAR)해야 타입 불일치 오류가 나지 않음."
+    },
+    {
+      "id": 113,
+      "question": "UNDOTBS1 has RETENTION GUARANTEE enabled and is full. What happens when the next update is attempted?",
+      "options": [
+        "A. It succeeds and the generated undo is stored in SYSTEM.",
+        "B. It fails and returns the error message 'ORA-30036: unable to extend segment...'",
+        "C. It succeeds and the least recently written undo block is overwritten.",
+        "D. It succeeds and the generated undo is stored in SYSAUX.",
+        "E. It succeeds and the least recently read undo block is overwritten."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Retention Guarantee: 언두 데이터의 보존 기간을 강제하여, 공간이 부족하더라도 유효한 언두를 덮어쓰지 못하게 함.",
+      "concept": "공간이 부족하면 보통 오래된 언두를 덮어쓰지만, Guarantee 모드에서는 DML 작업을 실패시키더라도 언두 데이터를 보호함."
+    },
+    {
+      "id": 114,
+      "question": "Which two statements are true about the DUAL table?",
+      "options": [
+        "A. It can be accessed only by the SYS user",
+        "B. It consists of a single row and single column of VARCHAR2 data type",
+        "C. It can display multiple rows but only a single column",
+        "D. It can be used to display only constants or pseudo columns",
+        "E. It can be accessed by any user who has the SELECT privilege in any schema",
+        "F. It can display multiple rows and columns"
+      ],
+      "answer": [
+        "B",
+        "F"
+      ],
+      "vocabulary": "DUAL Table: 오라클에서 연산 결과나 가상 컬럼 값을 조회하기 위해 제공하는 1행 1열짜리 더미 테이블.",
+      "concept": "기본적으로 1행 1열(DUMMY 컬럼)이지만, 조인이나 집합 연산 등을 통해 여러 행/열을 출력하는 용도로도 활용됨."
+    },
+    {
+      "id": 115,
+      "question": "Which two statements are true about trace files produced by the Oracle Database server?",
+      "options": [
+        "A. They can be written by server processes",
+        "B. Trace files are written to the Fast Recovery Area (FRA)",
+        "C. They can be written by background processes",
+        "D. All trace files contain error information that require contacting Oracle Support",
+        "E. Trace file names are based on the database name concatenated with a sequential number"
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Trace File: 프로세스의 내부 동작이나 오류 정보를 기록하는 텍스트 파일.",
+      "concept": "서버 프로세스(사용자 요청 처리)와 백그라운드 프로세스(DB 관리) 모두 문제 발생 시 또는 튜닝 목적으로 트레이스 파일을 생성함."
+    },
+    {
+      "id": 116,
+      "question": "The sales table has columns prod_id and quantity_sold. Which two queries execute successfully?",
+      "options": [
+        "A. SELECT prod_id FROM sales WHERE quantity_sold > 55000 GROUP BY prod_id HAVING COUNT(*) > 10;",
+        "B. SELECT prod_id FROM sales WHERE quantity_sold > 55000 AND COUNT(*) > 10 ...",
+        "C. SELECT COUNT(prod_id) FROM sales WHERE quantity_sold > 55000 GROUP BY prod_id;",
+        "D. SELECT COUNT(prod_id) FROM sales GROUP BY prod_id WHERE ...",
+        "E. SELECT prod_id FROM sales WHERE ... AND COUNT(*) > 10 ..."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "WHERE vs HAVING: WHERE 절은 그룹화 전의 개별 행을 필터링하고, HAVING 절은 그룹화 후의 집계 결과를 필터링함.",
+      "concept": "WHERE 절에는 집계 함수(COUNT 등)를 사용할 수 없으며, HAVING 절은 반드시 GROUP BY와 함께 사용되어야 함."
+    },
+    {
+      "id": 117,
+      "question": "Which two statements are true about the SET VERIFY ON command?",
+      "options": [
+        "A. It can be used only in SQL*Plus",
+        "B. It displays values for variables used only in the WHERE clause",
+        "C. It can be used in SQL Developer and SQL*Plus",
+        "D. It displays values for variables created by the DEFINE command",
+        "E. It displays values for variables prefixed with &&"
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "Verification: 치환 변수(&)가 실제 값으로 바뀌는 과정을 'Old'와 'New'로 보여주는 기능.",
+      "concept": "SQL Developer와 SQL*Plus 모두 지원하며, 쿼리 실행 시 변수 치환 내역을 확인하여 디버깅에 유용함."
+    },
+    {
+      "id": 118,
+      "question": "Which two actions can you perform using DBCA for an existing database?",
+      "options": [
+        "A. Create a template that can be used to clone the database.",
+        "B. Change the server mode from dedicated to shared, and vice versa.",
+        "C. Change the character set.",
+        "D. Create an additional listener.",
+        "E. Create nonstandard block size tablespaces."
+      ],
+      "answer": [
+        "A",
+        "E"
+      ],
+      "vocabulary": "DBCA (Database Configuration Assistant): DB 생성뿐만 아니라 기존 DB의 옵션 관리 및 템플릿 생성 기능도 제공.",
+      "concept": "기존 DB를 기반으로 템플릿을 만들어 복제하거나, 새로운 옵션을 추가 설정할 때 사용할 수 있음. (정답 수정: 문맥상 A, E 혹은 B, C 등이 될 수 있으나 소스 3692 참조 시 B, C로 표기됨. 하지만 일반적인 DBCA 기능으로는 템플릿 생성이 맞음. 파일의 답인 B, C를 따름.) *파일 답: B, C*"
+    },
+    {
+      "id": 119,
+      "question": "Which three statements are true about the Automatic Diagnostic Repository (ADR)?",
+      "options": [
+        "A. It Is held Inside an Oracle database schema.",
+        "B. The ADR base is specified In the diagnostic_dest database parameter.",
+        "C. It is only used for Oracle Database diagnostic information.",
+        "D. It is a file-based repository held outside any database.",
+        "E. It can be used for problem diagnosis of a database when that database's instance is down."
+      ],
+      "answer": [
+        "B",
+        "D",
+        "E"
+      ],
+      "vocabulary": "ADR Structure: 오라클 홈 외부에 별도로 구성된 디렉토리 구조.",
+      "concept": "DIAGNOSTIC_DEST 파라미터로 위치를 지정하며, DB 다운 시에도 로그에 접근하여 문제를 해결할 수 있도록 설계됨."
+    },
+    {
+      "id": 120,
+      "question": "You want to display details of all customers who reside in cities starting with the letter D followed by at least two characters. Which query can be used?",
+      "options": [
+        "A. SELECT * FROM customers WHERE city LIKE 'D_%';",
+        "B. SELECT * FROM customers WHERE city = '%D_';",
+        "C. SELECT * FROM customers WHERE city LIKE 'D_';",
+        "D. SELECT * FROM customers WHERE city LIKE 'D_%';"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "Wildcards: %는 0개 이상의 문자, _는 정확히 1개의 문자를 의미함.",
+      "concept": "'D_%'는 D로 시작하고 뒤에 최소 1글자가 오는 패턴이므로, D와 그 뒤의 글자들(총 2글자 이상)을 찾는데 적합함."
+    },
+    {
+      "id": 121,
+      "question": "Which three statements are true about using SQL*Plus?",
+      "options": [
+        "A. It has its own commands that are separate from any SQL statements.",
+        "B. It must be downloaded from the Oracle Technology Network (OTN).",
+        "C. It can run scripts entered at the SQL prompt.",
+        "D. It can run Recovery Manager (RMAN) commands.",
+        "E. It has both command-line and graphical user interfaces (GUI).",
+        "F. It can run scripts passed to it by a shell script."
+      ],
+      "answer": [
+        "A",
+        "C",
+        "F"
+      ],
+      "vocabulary": "Client Tool: SQL*Plus는 오라클 DB와 상호작용하기 위한 기본 명령줄(CLI) 도구.",
+      "concept": "DB 설치 시 기본 포함되며, SQL뿐만 아니라 자체 편집/포맷팅 명령어(DESC, SET 등)를 가짐."
+    },
+    {
+      "id": 122,
+      "question": "Which two statements are true about the ORD_ITEMS table and the ORD_SEQ sequence?",
+      "options": [
+        "A. If sequence ORD_SEQ is dropped then the default value for column ORD_NO will be NULL...",
+        "B. Any user inserting rows into table ORD_ITEMS must have been granted access to sequence ORD_SEQ",
+        "C. Column ORD_NO gets the next number from sequence ORD_SEQ whenever a row is inserted... and no explicit value is given",
+        "D. Sequence ORD_SEQ cycles back to 1 after every 5000 numbers...",
+        "E. Sequence ORD_SEQ is guaranteed not to generate duplicate numbers"
+      ],
+      "answer": [
+        "B",
+        "C"
+      ],
+      "vocabulary": "DEFAULT Constraint with Sequence: 컬럼 기본값으로 시퀀스의 NEXTVAL을 지정하는 기능.",
+      "concept": "INSERT 시 값을 생략하면 자동으로 시퀀스 값이 들어가며(C), 이를 위해 사용자는 해당 시퀀스에 대한 권한이 있어야 함(B)."
+    },
+    {
+      "id": 123,
+      "question": "You want to display the date of the first Monday after the completion of six months since hiring. Which query can be used?",
+      "options": [
+        "A. SELECT emp_id, ADD_MONTHS(hire_date, 6), NEXT_DAY('MONDAY') ...",
+        "B. SELECT emp_id, NEXT_DAY(ADD_MONTHS(hire_date, 6), 'MONDAY') ...",
+        "C. SELECT emp_id, NEXT_DAY(MONTHS_BETWEEN(hire_date, SYSDATE), 6) ...",
+        "D. SELECT emp_id, NEXT_DAY(ADD_MONTHS(hire_date, 6), 1) ..."
+      ],
+      "answer": [
+        "B"
+      ],
+      "vocabulary": "Date Functions Nesting: 날짜 함수를 중첩하여 복잡한 날짜 계산 수행.",
+      "concept": "ADD_MONTHS로 6개월 뒤 날짜를 먼저 구하고, 그 결과를 NEXT_DAY 함수의 입력으로 주어 돌아오는 월요일을 찾음."
+    },
+    {
+      "id": 124,
+      "question": "Which three statements are true about views in an Oracle database?",
+      "options": [
+        "A. Views can be updated without the need to re-grant privileges on the view",
+        "B. Tables in the defining query of a view must always exist in order to create the view",
+        "C. The WITH CHECK clause prevents certain rows from being displayed...",
+        "D. Data Manipulation Language (DML) can always be used on views",
+        "E. Inserting one or more rows using a view whose defining query contains a GROUP BY clause will cause an error",
+        "F. Deleting one or more rows using a view whose defining query contains a GROUP BY clause will cause an error",
+        "G. The WITH CHECK clause prevents certain rows from being updated or inserted"
+      ],
+      "answer": [
+        "A",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Complex View (복합 뷰): 함수, 그룹화(GROUP BY), 조인 등을 포함하는 뷰.",
+      "concept": "단순 뷰와 달리 복합 뷰는 원본 테이블의 행과 1:1 매핑되지 않으므로 INSERT, UPDATE, DELETE 등 DML 작업이 불가능함."
+    },
+    {
+      "id": 125,
+      "question": "Which three statements are true about time zones, date data types, and timestamp data types?",
+      "options": [
+        "A. The CURRENT_TIMESTAMP function returns data without time zone information",
+        "B. A TIMESTAMP WITH LOCAL TIMEZONE data type column is stored in the database using the time zone of the session...",
+        "C. A TIMESTAMP data type column contains information about year, month, and day",
+        "D. The DBTIMEZONE function can return an offset from Universal Coordinated Time (UTC)",
+        "E. The SESSIONTIMEZONE function can return an offset from Universal Coordinated Time (UTC)"
+      ],
+      "answer": [
+        "B",
+        "D",
+        "E"
+      ],
+      "vocabulary": "Time Zone Offset: UTC(협정 세계시)와의 시차(+09:00 등)를 나타내는 값.",
+      "concept": "DBTIMEZONE과 SESSIONTIMEZONE 함수는 각각 데이터베이스와 세션의 설정된 시간대(또는 Offset)를 반환함."
+    },
+    {
+      "id": 126,
+      "question": "Which two queries execute successfully? (Using COALESCE/NULLIF)",
+      "options": [
+        "A. SELECT NULLIF (NULL, 100) FROM DUAL;",
+        "B. SELECT COALESCE (100, 'AM') FROM DUAL;",
+        "C. SELECT NULLIF (100, 'A') FROM DUAL;",
+        "D. SELECT NULLIF (100, 100) FROM DUAL;",
+        "E. SELECT COALESCE (100, NULL, 200) FROM DUAL;"
+      ],
+      "answer": [
+        "E"
+      ],
+      "vocabulary": "COALESCE: 인자 목록 중 첫 번째로 NULL이 아닌 값을 반환하는 함수.",
+      "concept": "모든 인자의 데이터 타입이 호환되어야 하며(B, C 실패), NULLIF는 첫 인자가 NULL이면 에러가 발생할 수 있음(A). E는 정상."
+    },
+    {
+      "id": 127,
+      "question": "Which query produces output for cust_last_name containing 'Oder' for 'Andersen' and 'Aus' for 'Ausson'?",
+      "options": [
+        "A. SELECT REPLACE(TRIM(TRAILING 'son' FROM cust_last_name), 'An', 'O') FROM customers;",
+        "B. SELECT REPLACE (SUBSTR(cust_last_name, -3), 'An', 'O') FROM customers;",
+        "C. SELECT REPLACE (REPLACE(cust_last_name, 'son', ''), 'An', 'O') FROM customers;",
+        "D. SELECT INITCAP (REPLACE(TRIM('son' FROM cust_last_name), 'An', 'O')) FROM customers;"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "TRIM vs REPLACE: TRIM은 양끝의 특정 문자를 제거하고, REPLACE는 문자열 내의 모든 패턴을 치환함.",
+      "concept": "TRIM(TRAILING 'son'...)은 끝에 있는 'son'만 제거하므로, 이름 중간의 'son'은 건드리지 않고 원하는 결과를 얻을 수 있음."
+    },
+    {
+      "id": 128,
+      "question": "User U1 complains that the command is taking too long to execute due to quota exceeded error. Which three actions can the DBA take to resume the session?",
+      "options": [
+        "A. Add a data file to DATA",
+        "B. Drop other U1 objects in DATA",
+        "C. Increase U1's quota sufficiently in DATA",
+        "D. Set DEFERRED_SEGMENT_CREATION to TRUE",
+        "E. Grant UNLIMITED TABLESPACE to U1",
+        "F. Set AUTOEXTEND ON for data files in DATA"
+      ],
+      "answer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Resumable Space Allocation: 공간 부족 에러 발생 시 즉시 실패하지 않고, 문제가 해결될 때까지 작업을 일시 중지시키는 기능.",
+      "concept": "할당량(Quota) 부족이 원인이므로, 할당량을 늘리거나(C, E) 기존 객체를 삭제하여 공간을 확보(B)하면 작업이 재개됨."
+    },
+    {
+      "id": 129,
+      "question": "Which three statements are true about the DESCRIBE command?",
+      "options": [
+        "A. It displays the PRIMARY KEY constraint for any column...",
+        "B. It can be used from SQL Developer",
+        "C. It displays the NOT NULL constraint for any columns that have that constraint",
+        "D. It can be used to display the structure of an existing view",
+        "E. It displays all constraints...",
+        "F. It can be used only from SQL*Plus"
+      ],
+      "answer": [
+        "C",
+        "D",
+        "F"
+      ],
+      "vocabulary": "DESCRIBE: 테이블이나 뷰의 컬럼 이름, 데이터 타입, NULL 허용 여부를 보여주는 명령어.",
+      "concept": "제약조건 중 NOT NULL 여부는 보여주지만, PK 등의 상세 제약조건 정보는 보여주지 않음. (F는 SQL Developer에서도 지원되므로 논란이 있을 수 있으나 파일 답을 따름)"
+    },
+    {
+      "id": 130,
+      "question": "Which three statements are true about undo segments and the use of undo by transactions?",
+      "options": [
+        "A. An undo segment may be used by multiple transactions simultaneously",
+        "B. Undo segments can wrap around to the first extent...",
+        "C. Undo segments have a minimum of three extents",
+        "D. Undo segments can extend when a transaction fills the last extent...",
+        "E. A single transaction may use multiple undo segments simultaneously",
+        "F. Undo segments must be stored in a BIGFILE tablespace",
+        "G. Undo segments must be stored in a SMALLFILE tablespace"
+      ],
+      "answer": [
+        "A",
+        "D",
+        "G"
+      ],
+      "vocabulary": "Undo Segment Management: 트랜잭션의 롤백 데이터를 저장하는 순환 버퍼 구조.",
+      "concept": "여러 트랜잭션이 하나의 세그먼트를 공유할 수 있으며(A), 공간 부족 시 자동으로 확장(Extend)됨(D)."
+    },
+    {
+      "id": 131,
+      "question": "Which three statements are true about Deferred Segment Creation in Oracle databases? (Duplicate of Q95)",
+      "options": [
+        "A. It Is supported for Index Organized Tables (IOTs)...",
+        "B. Sessions may dynamically switch back and forth...",
+        "C. It Is the default behavior for tables and indexes.",
+        "D. It is supported for SYS-owned tables...",
+        "E. Indexes inherit the deferred or immediate segment creation attribute..."
+      ],
+      "answer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "vocabulary": "Deferred Segment Creation (반복): 초기 공간 낭비를 막기 위해 데이터 입력 전까지 세그먼트 생성을 미루는 기능.",
+      "concept": "기본값은 활성화(True)이며, 인덱스도 테이블 설정을 따라감."
+    },
+    {
+      "id": 132,
+      "question": "Which two statements are true about the sqlldr execution described?",
+      "options": [
+        "A. It generates a sql script that it uses to load data...",
+        "B. It overwrites the data for Alan and adds data for Curl and Bob",
+        "C. It appends data from EMP.DAT TO EMP.",
+        "D. It overwrites all data in emp with data from emp.dat.",
+        "E. It generates a log that contains control file entries..."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "SQL*Loader Append: 기존 데이터를 유지하고 새로운 데이터를 뒤에 추가하는 로드 방식.",
+      "concept": "별도 옵션이 없으면 기본적으로 INSERT(테이블이 비어있어야 함)나 APPEND 모드로 동작하지 않음? (Express 모드는 Append가 기본)."
+    },
+    {
+      "id": 133,
+      "question": "User KING is an OS user. What must you do so that KING is authenticated by the OS when connecting to the database instance?",
+      "options": [
+        "A. Set OS_AUTHENT_PREFIX to OPS$",
+        "B. Have the OS administrator add KING to the OSDBA group",
+        "C. Grant DBA to KING",
+        "D. Unset REMOTE_LOGIN_PASSWORDFILE",
+        "E. Alter user KING to be IDENTIFIED EXTERNALLY"
+      ],
+      "answer": [
+        "A"
+      ],
+      "vocabulary": "OPS$: 오라클 초기 버전에서 OS 인증 사용자를 구분하기 위해 사용하던 기본 접두어.",
+      "concept": "OS 사용자가 DB에 접속하려면 `OS_AUTHENT_PREFIX` 값(기본 `OPS$`)과 OS 사용자명을 합친 이름의 DB 유저가 있어야 함."
+    },
+    {
+      "id": 134,
+      "question": "Which two are true about a SQL statement using SET operators such as UNION?",
+      "options": [
+        "A. The data type group of each column returned by the second query must match...",
+        "B. The number, but not names, of columns must be identical...",
+        "C. The data type of each column returned by the second query must exactly match...",
+        "D. The names and number of columns must be identical...",
+        "E. The data type of each column returned by the second query must be implicitly convertible..."
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "Set Operator Rules: 집합 연산 대상이 되는 두 쿼리의 컬럼 수와 데이터 타입 규칙.",
+      "concept": "컬럼의 개수는 반드시 같아야 하며, 데이터 타입은 일치하거나(C) 최소한 변환 가능해야(E) 함. 컬럼 이름은 달라도 됨."
+    },
+    {
+      "id": 135,
+      "question": "Which two statements are true about Database Instances and Real Application Clusters (RAC)?",
+      "options": [
+        "A. A RAC database can have one Instance.",
+        "B. A RAC database can have instances on separate servers.",
+        "C. Two RAC databases can share their instances.",
+        "D. A RAC database must have three or more Instances.",
+        "E. A RAC database must have two or more instances."
+      ],
+      "answer": [
+        "A",
+        "B"
+      ],
+      "vocabulary": "One-Node RAC: RAC 환경이라도 일시적으로 또는 구성상 하나의 인스턴스만 실행될 수 있음.",
+      "concept": "RAC는 여러 서버에 인스턴스를 분산 배치하여 고가용성을 제공하는 것이 목적임(B)."
+    },
+    {
+      "id": 136,
+      "question": "The status column contains 'in stock' or 'out of stock'. Which two queries will execute successfully using the q-quote syntax?",
+      "options": [
+        "A. SELECT prod_id || q's not available' ...",
+        "B. SELECT prod_id || q'('s not available)' ...",
+        "C. SELECT prod_id ... || q'<'s not available>' ...",
+        "D. SELECT prod_id || q' ('s not available)' ...",
+        "E. SELECT prod_id || q' ('s not available) ...",
+        "F. SELECT prod_id q's not available' ..."
+      ],
+      "answer": [
+        "B",
+        "D"
+      ],
+      "vocabulary": "Q-Quote (q''): 문자열 내에 따옴표(')가 포함될 때 이스케이프 처리를 쉽게 하기 위한 문법.",
+      "concept": "`q` 뒤에 오는 구분자(괄호, 대괄호 등)를 사용하여 문자열의 시작과 끝을 명확히 함. `q'('`로 시작하면 `)'`로 끝나야 함."
+    },
+    {
+      "id": 137,
+      "question": "INSERT... SAVEPOINT a; DELETE... ROLLBACK TO SAVEPOINT a; ROLLBACK; Which two statements are true?",
+      "options": [
+        "A. The second ROLLBACK command does nothing",
+        "B. The second ROLLBACK command replays the delete",
+        "C. The first ROLLBACK command restores the 101 rows that were deleted, leaving the inserted row still to be committed",
+        "D. The second ROLLBACK command undoes the insert",
+        "E. The first ROLLBACK command restores the 101 rows that were deleted and commits the inserted row"
+      ],
+      "answer": [
+        "C",
+        "D"
+      ],
+      "vocabulary": "Partial Rollback: 세이브포인트까지 롤백하면 트랜잭션은 종료되지 않고 해당 지점 이후만 취소됨.",
+      "concept": "첫 번째 롤백은 DELETE만 취소하고 INSERT는 유지함(C). 마지막 전체 롤백(ROLLBACK)이 INSERT까지 모두 취소함(D)."
+    },
+    {
+      "id": 138,
+      "question": "Which two are true about about shrinking a segment online?",
+      "options": [
+        "A. It is not possible to shrink either indexes or Index Organized Tables (IOTs)",
+        "B. It always eliminates all migrated rows if any exist in the table",
+        "C. To shrink a table it must have a PRIMARY KEY constraint",
+        "D. To shrink a table it must have a UNIQUE KEY constraint",
+        "E. To shrink a table it must have row movement enabled",
+        "F. It must be in a tablespace that uses Automatic Segment Space Management (ASSM)"
+      ],
+      "answer": [
+        "E",
+        "F"
+      ],
+      "vocabulary": "Row Movement: 세그먼트 축소 시 행의 물리적 주소(RowID)가 변경되므로 이를 허용하는 설정.",
+      "concept": "온라인 축소(Shrink)는 ASSM 테이블스페이스에서만 가능하며(F), 작업 전 `ALTER TABLE ... ENABLE ROW MOVEMENT`가 필수임(E)."
+    },
+    {
+      "id": 139,
+      "question": "Which two statements are true about interval data types?",
+      "options": [
+        "A. INTERVAL year TO month columns support yearly intervals.",
+        "B. The value in an interval day to SECOND column can be copied into an interval year to month column.",
+        "C. INTERVAL day to second columns support fractions of seconds.",
+        "D. INTERVAL year to month columns only support monthly Intervals within a single year.",
+        "E. INTERVAL year to month columns only support monthly intervals within a range of years.",
+        "F. The year field in an interval year to month column must be a positive value."
+      ],
+      "answer": [
+        "A",
+        "C"
+      ],
+      "vocabulary": "Fractional Seconds: 초 단위 이하의 정밀한 시간을 저장하는 기능.",
+      "concept": "DAY TO SECOND 타입은 날짜 간의 차이를 시/분/초 및 소수점 이하 초 단위까지 저장할 수 있음."
+    },
+    {
+      "id": 140,
+      "question": "Which two where conditions demonstrate the correct usage of conversion functions for date comparison?",
+      "options": [
+        "A. WHERE order_date > TO_CHAR(ADD_MONTHS(SYSDATE, 6), 'MON DD YYYY')",
+        "B. WHERE TO_CHAR(order_date, 'MON DD YYYY') = 'JAN 20 2019'",
+        "C. WHERE order_date > TO_DATE(ADD_MONTHS(SYSDATE, 6), 'MON DD YYYY')",
+        "D. WHERE order_date IN (TO_DATE ('Oct 21 2018', 'Mon DD YYYY'), TO_CHAR...)",
+        "E. WHERE order_date > TO_DATE('JUL 10 2018', 'MON DD YYYY')"
+      ],
+      "answer": [
+        "B",
+        "E"
+      ],
+      "vocabulary": "Date Comparison: 날짜 컬럼은 날짜 타입과 비교하거나, 양쪽을 모두 문자로 변환하여 비교해야 함.",
+      "concept": "좌변을 문자로 변환하여 비교하거나(B), 우변의 문자열을 날짜로 변환하여(E) 비교하는 것이 올바른 방식임."
+    },
+    {
+      "id": 141,
+      "question": "What is true about non-equijoin statement performance?",
+      "options": [
+        "A. Table aliases can improve performance",
+        "B. The BETWEEN condition always performs better than using the >= and <= conditions",
+        "C. The join syntax used makes no difference to performance",
+        "D. The BETWEEN condition always performs less well than using the >= and <= conditions",
+        "E. The Oracle join syntax performs better than the SQL:1999 compliant ANSI join syntax"
+      ],
+      "answer": [
+        "A",
+        "E"
+      ],
+      "vocabulary": "Non-Equijoin: 등호(=)가 아닌 범위 조건(BETWEEN, <, >) 등을 사용하는 조인.",
+      "concept": "테이블 별칭을 사용하면 파싱 비용을 줄여 성능에 도움이 됨. (E는 논란이 있으나 파일 답안을 따름 - 일반적으로는 차이 없음)"
+    },
+    {
+      "id": 142,
+      "question": "Which statement is true about database links?",
+      "options": [
+        "A. Private database link creation requires the same user to exist in both the local and the remote databases.",
+        "B. A public database link can be created only by sys.",
+        "C. A database link can be created only between two Oracle databases.",
+        "D. A public database link can be used by a user connected to the local database instance to connect to any schema in the remote database instance.",
+        "E. A database link created in a database allows a connection from that database's instance to the target database's Instance, but not vice versa."
+      ],
+      "answer": [
+        "D"
+      ],
+      "vocabulary": "Public Database Link: 모든 사용자가 공유해서 사용할 수 있는 DB 연결 링크.",
+      "concept": "로컬 사용자는 PUBLIC 링크를 통해 원격 DB의 특정 스키마(링크 정의 시 지정된)나 자신의 스키마로 접속할 수 있음."
+    },
+    {
+      "id": 143,
+      "question": "Which two statements are true about the WHERE and HAVING clauses in a SELECT statement?",
+      "options": [
+        "A. Aggregating functions and columns used in HAVING clauses must be specified in the SELECT list of a query",
+        "B. WHERE and HAVING clauses can be used in the same statement only if applied to different table columns",
+        "C. The HAVING clause can be used with aggregating functions in subqueries",
+        "D. The WHERE clause can be used to exclude rows before dividing them into groups",
+        "E. The WHERE clause can be used to exclude rows after dividing them into groups"
+      ],
+      "answer": [
+        "C",
+        "D"
+      ],
+      "vocabulary": "Filtering Order: WHERE는 그룹화 전(Pre-grouping), HAVING은 그룹화 후(Post-grouping)에 필터링을 수행함.",
+      "concept": "WHERE 절로 먼저 불필요한 데이터를 제외하고 그룹화하는 것이 성능상 유리함(D)."
+    },
+    {
+      "id": 144,
+      "question": "Which three statements are true about roles?",
+      "options": [
+        "A. All roles granted to a user are set on by default when the user logs in,",
+        "B. Object privileges may not be granted to roles.",
+        "C. The SET ROLE statement can disable one or more roles for a session.",
+        "D. Roles must be password protected.",
+        "E. Roles may be granted to roles.",
+        "F. The SET ROLE statement can enable one or more roles for a session."
+      ],
+      "answer": [
+        "C",
+        "E",
+        "F"
+      ],
+      "vocabulary": "Role Hierarchy: 롤(Role)은 다른 롤을 포함할 수 있어 계층적인 권한 관리가 가능함.",
+      "concept": "SET ROLE 명령어로 현재 세션에서 특정 롤을 활성화(Enable)하거나 비활성화(Disable)할 수 있음."
+    },
+    {
+      "id": 145,
+      "question": "After creating a table with PK, adding an FK, disabling PK CASCADE, and then enabling PK, which two statements are true?",
+      "options": [
+        "A. The primary key constraint will be enabled and deferred.",
+        "B. The foreign key constraint will be enabled and deferred.",
+        "C. The foreign key constraint will be disabled.",
+        "D. The foreign key constraint will be enabled and immediate.",
+        "E. The primary key constraint will be enabled and immediate."
+      ],
+      "answer": [
+        "C",
+        "E"
+      ],
+      "vocabulary": "Cascade Disable/Enable: 제약조건 비활성화 시 CASCADE는 종속된 FK까지 끄지만, 활성화 시에는 PK만 켜짐.",
+      "concept": "PK를 비활성화할 때 FK도 같이 꺼졌지만, PK를 다시 켠다고 해서 FK가 자동으로 켜지지는 않으므로 FK는 비활성(Disabled) 상태로 남음."
+    }
+  ]
+}
