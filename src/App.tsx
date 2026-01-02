@@ -14,7 +14,7 @@ interface Question {
 }
 
 function App() {
-  const [questions, setQuestions] = useState<Question[]>(initialData.questions as Question[]);
+  const [questions, setQuestions] = useState<Question[]>(() => [...(initialData.questions as Question[])].sort(() => Math.random() - 0.5));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
