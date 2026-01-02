@@ -74,6 +74,12 @@
   margin-bottom: 20px;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .q-id {
   font-weight: 600;
   color: #fff;
@@ -97,6 +103,27 @@
   transition: all 0.2s;
 }
 .edit-btn:hover {
+  background: #f5f5f5;
+  border-color: #999;
+  color: #000;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #666;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.toggle-btn:hover {
   background: #f5f5f5;
   border-color: #999;
   color: #000;

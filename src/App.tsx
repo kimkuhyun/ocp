@@ -18,6 +18,7 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hideAnswers, setHideAnswers] = useState(true);
   
   // 수정 모드 상태
   const [isEditing, setIsEditing] = useState(false);
@@ -29,10 +30,10 @@ function App() {
   // 문제 이동 시 상태 초기화
   useEffect(() => {
     setSelectedOptions([]);
-    setIsSubmitted(false);
     setIsEditing(false);
     setJsonError(null);
-  }, [currentIndex]);
+    setIsSubmitted(!hideAnswers);
+  }, [currentIndex, hideAnswers]);
 
   // 옵션 선택 핸들러
   const handleOptionClick = (option: string) => {
@@ -124,7 +125,22 @@ function App() {
             /* 문제 풀이 모드 */
             <>
               <div className="card-header">
-                <span className="q-id">Q{currentQuestion.id}</span>
+                <div className="header-left">
+                  <span className="q-id">Q{currentQuestion.id}</span>
+                  <button 
+                    onClick={() => {
+                      const newHideAnswers = !hideAnswers;
+                      setHideAnswers(newHideAnswers);
+                      if (!newHideAnswers) {
+                        setIsSubmitted(true);
+                      }
+                    }} 
+                    className="toggle-btn"
+                    title={hideAnswers ? "정답 표시" : "정답 가리기"}
+                  >
+                    {hideAnswers ? '답 가리기: ON' : '답 가리기: OFF'}
+                  </button>
+                </div>
                 <button onClick={handleEditClick} className="edit-btn" title="JSON 수정">
                   <Edit2 size={16} /> 수정
                 </button>
@@ -139,8 +155,11 @@ function App() {
                   
                   if (isSelected(label)) className += " selected";
                   
-                  // 제출 후 정답/오답 표시
-                  if (isSubmitted) {
+                  // 답 가리기 OFF일 경우 항상 정답 표시
+                  if (!hideAnswers && isCorrect(label)) className += " correct";
+                  
+                  // 답 가리기 ON이고 제출 후 정답/오답 표시
+                  if (hideAnswers && isSubmitted) {
                     if (isCorrect(label)) className += " correct";
                     else if (isSelected(label) && !isCorrect(label)) className += " wrong";
                   }
@@ -152,8 +171,9 @@ function App() {
                       onClick={() => handleOptionClick(opt)}
                     >
                       {opt}
-                      {isSubmitted && isCorrect(label) && <CheckCircle className="icon-feedback success" size={20} />}
-                      {isSubmitted && isSelected(label) && !isCorrect(label) && <XCircle className="icon-feedback error" size={20} />}
+                      {!hideAnswers && isCorrect(label) && <CheckCircle className="icon-feedback success" size={20} />}
+                      {hideAnswers && isSubmitted && isCorrect(label) && <CheckCircle className="icon-feedback success" size={20} />}
+                      {hideAnswers && isSubmitted && isSelected(label) && !isCorrect(label) && <XCircle className="icon-feedback error" size={20} />}
                     </div>
                   );
                 })}
@@ -165,7 +185,7 @@ function App() {
                   className="submit-btn"
                   disabled={selectedOptions.length === 0}
                 >
-                  제출 및 정답 확인
+                  정답 확인
                 </button>
               ) : (
                 <div className="feedback-section">
